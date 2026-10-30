@@ -1,0 +1,12 @@
+{
+  "name": "mapascoca",
+  "private": true,
+  "description": "Mapa de cultivos de coca en Colombia por zonas (SIMCI)",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "shots": "node scripts/shots.cjs"
+  },
+  "devDependencies": {
+    "mapshaper": "0.7.71"
+  }
+}

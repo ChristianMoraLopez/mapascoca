@@ -1,0 +1,2331 @@
+{
+  "id" : "acs4-3wgp",
+  "name" : "Detección de Cultivos de Coca (hectáreas)",
+  "assetType" : "dataset",
+  "attribution" : "Ministerio de Justicia y del derecho - MinJusticia, Bogotá D.C.",
+  "attributionLink" : "https://forms.office.com/Pages/ResponsePage.aspx?id=zfse-ze-OEKE0k-sLHVR3N_w5CSpOupPgA3Rwqg8SJhUNkFSQVdLREZGSE9XVEk4R0s0M0w4NjlCSC4u",
+  "averageRating" : 0,
+  "category" : "Justicia y Derecho",
+  "createdAt" : 1590087890,
+  "description" : "Cuantificación de las hectáreas de los cultivos de coca existentes a 31 de diciembre de cada año en el territorio nacional. Información compilada para los años 2001 al 2024.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 5402,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "CC_40_BY_SA",
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 42272018,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1783540135,
+  "publicationGroup" : 17145175,
+  "publicationStage" : "published",
+  "rowsUpdatedAt" : 1783540111,
+  "rowsUpdatedBy" : "8ek4-hyhr",
+  "tableId" : 20454504,
+  "totalTimesRated" : 0,
+  "viewCount" : 41421,
+  "viewLastModified" : 1783540135,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1590089384,
+    "reviewedAutomatically" : false,
+    "state" : "approved",
+    "submissionId" : 7561045,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1590089214,
+    "targetAudience" : "public",
+    "workflowId" : 2188,
+    "reviewer" : {
+      "id" : "r4qn-dwdd",
+      "displayName" : "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos"
+    },
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1590089385,
+      "failureCount" : 0,
+      "startedAt" : 1590089384,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "8ek4-hyhr",
+      "displayName" : "Ministerio de Justicia y del Derecho"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 636760411,
+    "name" : "CODDEPTO",
+    "dataTypeName" : "text",
+    "description" : "Código DIVIPOLA del Departamento emitido por el DANE",
+    "fieldName" : "coddepto",
+    "position" : 1,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369451,
+    "cachedContents" : {
+      "non_null" : "319",
+      "largest" : "99",
+      "null" : "0",
+      "top" : [ {
+        "item" : "05",
+        "count" : "51"
+      }, {
+        "item" : "52",
+        "count" : "34"
+      }, {
+        "item" : "19",
+        "count" : "31"
+      }, {
+        "item" : "27",
+        "count" : "27"
+      }, {
+        "item" : "68",
+        "count" : "26"
+      }, {
+        "item" : "54",
+        "count" : "18"
+      }, {
+        "item" : "18",
+        "count" : "16"
+      }, {
+        "item" : "13",
+        "count" : "16"
+      }, {
+        "item" : "50",
+        "count" : "13"
+      }, {
+        "item" : "15",
+        "count" : "12"
+      }, {
+        "item" : "86",
+        "count" : "10"
+      }, {
+        "item" : "91",
+        "count" : "8"
+      }, {
+        "item" : "76",
+        "count" : "7"
+      }, {
+        "item" : "97",
+        "count" : "6"
+      }, {
+        "item" : "23",
+        "count" : "6"
+      }, {
+        "item" : "94",
+        "count" : "6"
+      }, {
+        "item" : "17",
+        "count" : "5"
+      }, {
+        "item" : "81",
+        "count" : "5"
+      }, {
+        "item" : "20",
+        "count" : "5"
+      }, {
+        "item" : "47",
+        "count" : "4"
+      } ],
+      "smallest" : "05",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760412,
+    "name" : "DEPARTAMENTO",
+    "dataTypeName" : "text",
+    "description" : "Nombre del departamento donde se detecta el cultivo",
+    "fieldName" : "departamento",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369511,
+    "cachedContents" : {
+      "non_null" : "319",
+      "largest" : "VICHADA",
+      "null" : "0",
+      "top" : [ {
+        "item" : "ANTIOQUIA",
+        "count" : "51"
+      }, {
+        "item" : "NARIÑO",
+        "count" : "34"
+      }, {
+        "item" : "CAUCA",
+        "count" : "31"
+      }, {
+        "item" : "CHOCÓ",
+        "count" : "27"
+      }, {
+        "item" : "SANTANDER",
+        "count" : "26"
+      }, {
+        "item" : "NORTE DE SANTANDER",
+        "count" : "18"
+      }, {
+        "item" : "BOLÍVAR",
+        "count" : "16"
+      }, {
+        "item" : "CAQUETÁ",
+        "count" : "16"
+      }, {
+        "item" : "META",
+        "count" : "13"
+      }, {
+        "item" : "BOYACÁ",
+        "count" : "12"
+      }, {
+        "item" : "PUTUMAYO",
+        "count" : "10"
+      }, {
+        "item" : "AMAZONAS",
+        "count" : "8"
+      }, {
+        "item" : "VALLE DEL CAUCA",
+        "count" : "7"
+      }, {
+        "item" : "GUAINÍA",
+        "count" : "6"
+      }, {
+        "item" : "CÓRDOBA",
+        "count" : "6"
+      }, {
+        "item" : "VAUPÉS",
+        "count" : "6"
+      }, {
+        "item" : "ARAUCA",
+        "count" : "5"
+      }, {
+        "item" : "CALDAS",
+        "count" : "5"
+      }, {
+        "item" : "CESAR",
+        "count" : "5"
+      }, {
+        "item" : "MAGDALENA",
+        "count" : "4"
+      } ],
+      "smallest" : "AMAZONAS",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760413,
+    "name" : "CODMPIO",
+    "dataTypeName" : "text",
+    "description" : "Código DIVIPOLA del Municipio emitido por el DANE",
+    "fieldName" : "codmpio",
+    "position" : 3,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369450,
+    "cachedContents" : {
+      "non_null" : "319",
+      "largest" : "99773",
+      "null" : "0",
+      "top" : [ {
+        "item" : "19256",
+        "count" : "1"
+      }, {
+        "item" : "18094",
+        "count" : "1"
+      }, {
+        "item" : "27205",
+        "count" : "1"
+      }, {
+        "item" : "05361",
+        "count" : "1"
+      }, {
+        "item" : "52490",
+        "count" : "1"
+      }, {
+        "item" : "94343",
+        "count" : "1"
+      }, {
+        "item" : "17433",
+        "count" : "1"
+      }, {
+        "item" : "05234",
+        "count" : "1"
+      }, {
+        "item" : "91263",
+        "count" : "1"
+      }, {
+        "item" : "54810",
+        "count" : "1"
+      }, {
+        "item" : "15531",
+        "count" : "1"
+      }, {
+        "item" : "52110",
+        "count" : "1"
+      }, {
+        "item" : "05890",
+        "count" : "1"
+      }, {
+        "item" : "17541",
+        "count" : "1"
+      }, {
+        "item" : "68255",
+        "count" : "1"
+      }, {
+        "item" : "20710",
+        "count" : "1"
+      }, {
+        "item" : "13655",
+        "count" : "1"
+      }, {
+        "item" : "91536",
+        "count" : "1"
+      }, {
+        "item" : "94887",
+        "count" : "1"
+      }, {
+        "item" : "52683",
+        "count" : "1"
+      } ],
+      "smallest" : "05031",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760414,
+    "name" : "MUNICIPIO",
+    "dataTypeName" : "text",
+    "description" : "Nombre del municipio donde se detecta el cultivo",
+    "fieldName" : "municipio",
+    "position" : 4,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369510,
+    "cachedContents" : {
+      "non_null" : "319",
+      "largest" : "ZARAGOZA",
+      "null" : "0",
+      "top" : [ {
+        "item" : "BOLÍVAR",
+        "count" : "3"
+      }, {
+        "item" : "ARGELIA",
+        "count" : "2"
+      }, {
+        "item" : "SAN PABLO",
+        "count" : "2"
+      }, {
+        "item" : "EL PEÑÓN",
+        "count" : "2"
+      }, {
+        "item" : "EL CARMEN",
+        "count" : "2"
+      }, {
+        "item" : "FLORENCIA",
+        "count" : "2"
+      }, {
+        "item" : "SUCRE",
+        "count" : "2"
+      }, {
+        "item" : "EL TAMBO",
+        "count" : "2"
+      }, {
+        "item" : "ALBANIA",
+        "count" : "2"
+      }, {
+        "item" : "MORALES",
+        "count" : "2"
+      }, {
+        "item" : "TOLEDO",
+        "count" : "2"
+      }, {
+        "item" : "PUERTO RICO",
+        "count" : "2"
+      }, {
+        "item" : "SAN MARTÍN",
+        "count" : "2"
+      }, {
+        "item" : "PAIME",
+        "count" : "1"
+      }, {
+        "item" : "MERCADERES",
+        "count" : "1"
+      }, {
+        "item" : "EL TARRA",
+        "count" : "1"
+      }, {
+        "item" : "VÉLEZ",
+        "count" : "1"
+      }, {
+        "item" : "SAN VICENTE DEL CAGUÁN",
+        "count" : "1"
+      }, {
+        "item" : "PUERTO LLERAS",
+        "count" : "1"
+      }, {
+        "item" : "MORICHAL (Morichal Nuevo) (Cor. Departamental)",
+        "count" : "1"
+      } ],
+      "smallest" : "ÁBREGO",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760415,
+    "name" : "2001",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2001",
+    "fieldName" : "_2001",
+    "position" : 5,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369509,
+    "cachedContents" : {
+      "non_null" : "164",
+      "largest" : "984.49",
+      "null" : "155",
+      "top" : [ {
+        "item" : "1",
+        "count" : "9"
+      }, {
+        "item" : "2",
+        "count" : "4"
+      }, {
+        "item" : "3",
+        "count" : "3"
+      }, {
+        "item" : "15",
+        "count" : "2"
+      }, {
+        "item" : "40",
+        "count" : "2"
+      }, {
+        "item" : "363.81",
+        "count" : "1"
+      }, {
+        "item" : "525.88",
+        "count" : "1"
+      }, {
+        "item" : "1325.09",
+        "count" : "1"
+      }, {
+        "item" : "138.25",
+        "count" : "1"
+      }, {
+        "item" : "232.7",
+        "count" : "1"
+      }, {
+        "item" : "452.25",
+        "count" : "1"
+      }, {
+        "item" : "1805.41",
+        "count" : "1"
+      }, {
+        "item" : "194.49",
+        "count" : "1"
+      }, {
+        "item" : "1693.61",
+        "count" : "1"
+      }, {
+        "item" : "19.56",
+        "count" : "1"
+      }, {
+        "item" : "11777.05",
+        "count" : "1"
+      }, {
+        "item" : "111.41",
+        "count" : "1"
+      }, {
+        "item" : "757.91",
+        "count" : "1"
+      }, {
+        "item" : "47.3",
+        "count" : "1"
+      }, {
+        "item" : "13.41",
+        "count" : "1"
+      } ],
+      "smallest" : "0.74",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760416,
+    "name" : "2002",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2002",
+    "fieldName" : "_2002",
+    "position" : 6,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369508,
+    "cachedContents" : {
+      "non_null" : "168",
+      "largest" : "996",
+      "null" : "151",
+      "top" : [ {
+        "item" : "1",
+        "count" : "9"
+      }, {
+        "item" : "3",
+        "count" : "6"
+      }, {
+        "item" : "2",
+        "count" : "4"
+      }, {
+        "item" : "5",
+        "count" : "4"
+      }, {
+        "item" : "102",
+        "count" : "3"
+      }, {
+        "item" : "43",
+        "count" : "3"
+      }, {
+        "item" : "9",
+        "count" : "3"
+      }, {
+        "item" : "45",
+        "count" : "3"
+      }, {
+        "item" : "34",
+        "count" : "2"
+      }, {
+        "item" : "64",
+        "count" : "2"
+      }, {
+        "item" : "47",
+        "count" : "2"
+      }, {
+        "item" : "55",
+        "count" : "2"
+      }, {
+        "item" : "19",
+        "count" : "2"
+      }, {
+        "item" : "23",
+        "count" : "2"
+      }, {
+        "item" : "66",
+        "count" : "2"
+      }, {
+        "item" : "17",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      }, {
+        "item" : "29",
+        "count" : "2"
+      }, {
+        "item" : "7",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760417,
+    "name" : "2003",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2003",
+    "fieldName" : "_2003",
+    "position" : 7,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369507,
+    "cachedContents" : {
+      "non_null" : "189",
+      "largest" : "9.9",
+      "null" : "130",
+      "top" : [ {
+        "item" : "39",
+        "count" : "3"
+      }, {
+        "item" : "17",
+        "count" : "2"
+      }, {
+        "item" : "15",
+        "count" : "2"
+      }, {
+        "item" : "55",
+        "count" : "2"
+      }, {
+        "item" : "18",
+        "count" : "2"
+      }, {
+        "item" : "8.92",
+        "count" : "2"
+      }, {
+        "item" : "230",
+        "count" : "2"
+      }, {
+        "item" : "20",
+        "count" : "2"
+      }, {
+        "item" : "57",
+        "count" : "2"
+      }, {
+        "item" : "769",
+        "count" : "2"
+      }, {
+        "item" : "537",
+        "count" : "2"
+      }, {
+        "item" : "93",
+        "count" : "2"
+      }, {
+        "item" : "27",
+        "count" : "2"
+      }, {
+        "item" : "18.27",
+        "count" : "1"
+      }, {
+        "item" : "13.04",
+        "count" : "1"
+      }, {
+        "item" : "2398",
+        "count" : "1"
+      }, {
+        "item" : "96",
+        "count" : "1"
+      }, {
+        "item" : "2248",
+        "count" : "1"
+      }, {
+        "item" : "2",
+        "count" : "1"
+      }, {
+        "item" : "173",
+        "count" : "1"
+      } ],
+      "smallest" : "0.07",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760418,
+    "name" : "2004",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2004",
+    "fieldName" : "_2004",
+    "position" : 8,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369506,
+    "cachedContents" : {
+      "non_null" : "190",
+      "largest" : "99",
+      "null" : "129",
+      "top" : [ {
+        "item" : "1",
+        "count" : "4"
+      }, {
+        "item" : "21",
+        "count" : "4"
+      }, {
+        "item" : "2",
+        "count" : "3"
+      }, {
+        "item" : "10",
+        "count" : "3"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      }, {
+        "item" : "30",
+        "count" : "3"
+      }, {
+        "item" : "8",
+        "count" : "2"
+      }, {
+        "item" : "13",
+        "count" : "2"
+      }, {
+        "item" : "2.07",
+        "count" : "2"
+      }, {
+        "item" : "78",
+        "count" : "2"
+      }, {
+        "item" : "516",
+        "count" : "2"
+      }, {
+        "item" : "12",
+        "count" : "2"
+      }, {
+        "item" : "173",
+        "count" : "2"
+      }, {
+        "item" : "62",
+        "count" : "2"
+      }, {
+        "item" : "40",
+        "count" : "2"
+      }, {
+        "item" : "11",
+        "count" : "2"
+      }, {
+        "item" : "252",
+        "count" : "2"
+      }, {
+        "item" : "554",
+        "count" : "1"
+      }, {
+        "item" : "74",
+        "count" : "1"
+      }, {
+        "item" : "94",
+        "count" : "1"
+      } ],
+      "smallest" : "0.97",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760419,
+    "name" : "2005",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2005",
+    "fieldName" : "_2005",
+    "position" : 9,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369505,
+    "cachedContents" : {
+      "non_null" : "190",
+      "largest" : "978",
+      "null" : "129",
+      "top" : [ {
+        "item" : "2",
+        "count" : "6"
+      }, {
+        "item" : "1",
+        "count" : "6"
+      }, {
+        "item" : "3",
+        "count" : "5"
+      }, {
+        "item" : "21",
+        "count" : "4"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "27",
+        "count" : "3"
+      }, {
+        "item" : "150",
+        "count" : "3"
+      }, {
+        "item" : "38",
+        "count" : "3"
+      }, {
+        "item" : "213",
+        "count" : "2"
+      }, {
+        "item" : "28",
+        "count" : "2"
+      }, {
+        "item" : "19",
+        "count" : "2"
+      }, {
+        "item" : "58",
+        "count" : "2"
+      }, {
+        "item" : "115",
+        "count" : "2"
+      }, {
+        "item" : "182",
+        "count" : "2"
+      }, {
+        "item" : "4",
+        "count" : "2"
+      }, {
+        "item" : "7",
+        "count" : "2"
+      }, {
+        "item" : "43",
+        "count" : "2"
+      }, {
+        "item" : "9",
+        "count" : "2"
+      }, {
+        "item" : "36",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760420,
+    "name" : "2006",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2006",
+    "fieldName" : "_2006",
+    "position" : 10,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369504,
+    "cachedContents" : {
+      "non_null" : "199",
+      "largest" : "96",
+      "null" : "120",
+      "top" : [ {
+        "item" : "4",
+        "count" : "7"
+      }, {
+        "item" : "3",
+        "count" : "7"
+      }, {
+        "item" : "1",
+        "count" : "6"
+      }, {
+        "item" : "2",
+        "count" : "5"
+      }, {
+        "item" : "13",
+        "count" : "4"
+      }, {
+        "item" : "8",
+        "count" : "3"
+      }, {
+        "item" : "197",
+        "count" : "3"
+      }, {
+        "item" : "15",
+        "count" : "3"
+      }, {
+        "item" : "67",
+        "count" : "3"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      }, {
+        "item" : "32",
+        "count" : "3"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "18",
+        "count" : "3"
+      }, {
+        "item" : "17",
+        "count" : "2"
+      }, {
+        "item" : "107",
+        "count" : "2"
+      }, {
+        "item" : "237",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      }, {
+        "item" : "9",
+        "count" : "2"
+      }, {
+        "item" : "16",
+        "count" : "2"
+      }, {
+        "item" : "75",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760421,
+    "name" : "2007",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2007",
+    "fieldName" : "_2007",
+    "position" : 11,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369503,
+    "cachedContents" : {
+      "non_null" : "195",
+      "largest" : "960",
+      "null" : "124",
+      "top" : [ {
+        "item" : "8",
+        "count" : "6"
+      }, {
+        "item" : "2",
+        "count" : "5"
+      }, {
+        "item" : "1",
+        "count" : "5"
+      }, {
+        "item" : "4",
+        "count" : "3"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      }, {
+        "item" : "53",
+        "count" : "3"
+      }, {
+        "item" : "28",
+        "count" : "3"
+      }, {
+        "item" : "22",
+        "count" : "3"
+      }, {
+        "item" : "5",
+        "count" : "3"
+      }, {
+        "item" : "102",
+        "count" : "2"
+      }, {
+        "item" : "58",
+        "count" : "2"
+      }, {
+        "item" : "13",
+        "count" : "2"
+      }, {
+        "item" : "353",
+        "count" : "2"
+      }, {
+        "item" : "192",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "2"
+      }, {
+        "item" : "25",
+        "count" : "2"
+      }, {
+        "item" : "63",
+        "count" : "2"
+      }, {
+        "item" : "3",
+        "count" : "2"
+      }, {
+        "item" : "32",
+        "count" : "2"
+      }, {
+        "item" : "61",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760422,
+    "name" : "2008",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2008",
+    "fieldName" : "_2008",
+    "position" : 12,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369502,
+    "cachedContents" : {
+      "non_null" : "206",
+      "largest" : "992",
+      "null" : "113",
+      "top" : [ {
+        "item" : "2",
+        "count" : "9"
+      }, {
+        "item" : "5",
+        "count" : "5"
+      }, {
+        "item" : "8",
+        "count" : "5"
+      }, {
+        "item" : "3",
+        "count" : "5"
+      }, {
+        "item" : "17",
+        "count" : "4"
+      }, {
+        "item" : "4",
+        "count" : "4"
+      }, {
+        "item" : "10",
+        "count" : "4"
+      }, {
+        "item" : "1",
+        "count" : "4"
+      }, {
+        "item" : "39",
+        "count" : "4"
+      }, {
+        "item" : "14",
+        "count" : "3"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      }, {
+        "item" : "62",
+        "count" : "3"
+      }, {
+        "item" : "126",
+        "count" : "2"
+      }, {
+        "item" : "386",
+        "count" : "2"
+      }, {
+        "item" : "120",
+        "count" : "2"
+      }, {
+        "item" : "1319",
+        "count" : "2"
+      }, {
+        "item" : "215",
+        "count" : "2"
+      }, {
+        "item" : "228",
+        "count" : "2"
+      }, {
+        "item" : "449",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760423,
+    "name" : "2009",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2009",
+    "fieldName" : "_2009",
+    "position" : 13,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369501,
+    "cachedContents" : {
+      "non_null" : "217",
+      "largest" : "982",
+      "null" : "102",
+      "top" : [ {
+        "item" : "4",
+        "count" : "8"
+      }, {
+        "item" : "1",
+        "count" : "7"
+      }, {
+        "item" : "2",
+        "count" : "5"
+      }, {
+        "item" : "12",
+        "count" : "5"
+      }, {
+        "item" : "6",
+        "count" : "5"
+      }, {
+        "item" : "10",
+        "count" : "4"
+      }, {
+        "item" : "3",
+        "count" : "3"
+      }, {
+        "item" : "5",
+        "count" : "3"
+      }, {
+        "item" : "63",
+        "count" : "3"
+      }, {
+        "item" : "19",
+        "count" : "3"
+      }, {
+        "item" : "38",
+        "count" : "3"
+      }, {
+        "item" : "114",
+        "count" : "3"
+      }, {
+        "item" : "8",
+        "count" : "3"
+      }, {
+        "item" : "75",
+        "count" : "3"
+      }, {
+        "item" : "21",
+        "count" : "3"
+      }, {
+        "item" : "42",
+        "count" : "3"
+      }, {
+        "item" : "794",
+        "count" : "2"
+      }, {
+        "item" : "22",
+        "count" : "2"
+      }, {
+        "item" : "182",
+        "count" : "2"
+      }, {
+        "item" : "17",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760424,
+    "name" : "2010",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2010",
+    "fieldName" : "_2010",
+    "position" : 14,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369500,
+    "cachedContents" : {
+      "non_null" : "207",
+      "largest" : "986",
+      "null" : "112",
+      "top" : [ {
+        "item" : "7",
+        "count" : "7"
+      }, {
+        "item" : "1",
+        "count" : "5"
+      }, {
+        "item" : "2",
+        "count" : "5"
+      }, {
+        "item" : "13",
+        "count" : "5"
+      }, {
+        "item" : "15",
+        "count" : "4"
+      }, {
+        "item" : "60",
+        "count" : "4"
+      }, {
+        "item" : "29",
+        "count" : "4"
+      }, {
+        "item" : "4",
+        "count" : "4"
+      }, {
+        "item" : "10",
+        "count" : "3"
+      }, {
+        "item" : "139",
+        "count" : "3"
+      }, {
+        "item" : "31",
+        "count" : "3"
+      }, {
+        "item" : "30",
+        "count" : "3"
+      }, {
+        "item" : "36",
+        "count" : "3"
+      }, {
+        "item" : "55",
+        "count" : "3"
+      }, {
+        "item" : "12",
+        "count" : "3"
+      }, {
+        "item" : "95",
+        "count" : "2"
+      }, {
+        "item" : "78",
+        "count" : "2"
+      }, {
+        "item" : "181",
+        "count" : "2"
+      }, {
+        "item" : "82",
+        "count" : "2"
+      }, {
+        "item" : "9",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760425,
+    "name" : "2011",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2011",
+    "fieldName" : "_2011",
+    "position" : 15,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369499,
+    "cachedContents" : {
+      "non_null" : "205",
+      "largest" : "99",
+      "null" : "114",
+      "top" : [ {
+        "item" : "1",
+        "count" : "8"
+      }, {
+        "item" : "3",
+        "count" : "8"
+      }, {
+        "item" : "16",
+        "count" : "6"
+      }, {
+        "item" : "7",
+        "count" : "4"
+      }, {
+        "item" : "66",
+        "count" : "4"
+      }, {
+        "item" : "2",
+        "count" : "3"
+      }, {
+        "item" : "32",
+        "count" : "3"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "35",
+        "count" : "3"
+      }, {
+        "item" : "15",
+        "count" : "3"
+      }, {
+        "item" : "48",
+        "count" : "3"
+      }, {
+        "item" : "86",
+        "count" : "3"
+      }, {
+        "item" : "30",
+        "count" : "3"
+      }, {
+        "item" : "44",
+        "count" : "3"
+      }, {
+        "item" : "19",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "2"
+      }, {
+        "item" : "202",
+        "count" : "2"
+      }, {
+        "item" : "409",
+        "count" : "2"
+      }, {
+        "item" : "842",
+        "count" : "2"
+      }, {
+        "item" : "13",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760426,
+    "name" : "2012",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2012",
+    "fieldName" : "_2012",
+    "position" : 16,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369498,
+    "cachedContents" : {
+      "non_null" : "212",
+      "largest" : "99",
+      "null" : "107",
+      "top" : [ {
+        "item" : "5",
+        "count" : "12"
+      }, {
+        "item" : "4",
+        "count" : "11"
+      }, {
+        "item" : "2",
+        "count" : "10"
+      }, {
+        "item" : "8",
+        "count" : "6"
+      }, {
+        "item" : "3",
+        "count" : "5"
+      }, {
+        "item" : "10",
+        "count" : "5"
+      }, {
+        "item" : "1",
+        "count" : "4"
+      }, {
+        "item" : "6",
+        "count" : "4"
+      }, {
+        "item" : "7",
+        "count" : "4"
+      }, {
+        "item" : "31",
+        "count" : "4"
+      }, {
+        "item" : "14",
+        "count" : "3"
+      }, {
+        "item" : "29",
+        "count" : "3"
+      }, {
+        "item" : "76",
+        "count" : "3"
+      }, {
+        "item" : "17",
+        "count" : "3"
+      }, {
+        "item" : "12",
+        "count" : "3"
+      }, {
+        "item" : "38",
+        "count" : "3"
+      }, {
+        "item" : "58",
+        "count" : "3"
+      }, {
+        "item" : "25",
+        "count" : "2"
+      }, {
+        "item" : "9",
+        "count" : "2"
+      }, {
+        "item" : "20",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760427,
+    "name" : "2013",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2013",
+    "fieldName" : "_2013",
+    "position" : 17,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369497,
+    "cachedContents" : {
+      "non_null" : "203",
+      "largest" : "999",
+      "null" : "116",
+      "top" : [ {
+        "item" : "1",
+        "count" : "17"
+      }, {
+        "item" : "3",
+        "count" : "13"
+      }, {
+        "item" : "4",
+        "count" : "7"
+      }, {
+        "item" : "2",
+        "count" : "7"
+      }, {
+        "item" : "5",
+        "count" : "6"
+      }, {
+        "item" : "6",
+        "count" : "5"
+      }, {
+        "item" : "7",
+        "count" : "4"
+      }, {
+        "item" : "106",
+        "count" : "3"
+      }, {
+        "item" : "13",
+        "count" : "3"
+      }, {
+        "item" : "19",
+        "count" : "3"
+      }, {
+        "item" : "76",
+        "count" : "3"
+      }, {
+        "item" : "49",
+        "count" : "3"
+      }, {
+        "item" : "31",
+        "count" : "3"
+      }, {
+        "item" : "14",
+        "count" : "3"
+      }, {
+        "item" : "8",
+        "count" : "3"
+      }, {
+        "item" : "11",
+        "count" : "3"
+      }, {
+        "item" : "25",
+        "count" : "3"
+      }, {
+        "item" : "28",
+        "count" : "2"
+      }, {
+        "item" : "61",
+        "count" : "2"
+      }, {
+        "item" : "208",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760428,
+    "name" : "2014",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2014",
+    "fieldName" : "_2014",
+    "position" : 18,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369496,
+    "cachedContents" : {
+      "non_null" : "204",
+      "largest" : "99",
+      "null" : "115",
+      "top" : [ {
+        "item" : "3",
+        "count" : "16"
+      }, {
+        "item" : "1",
+        "count" : "16"
+      }, {
+        "item" : "4",
+        "count" : "6"
+      }, {
+        "item" : "5",
+        "count" : "6"
+      }, {
+        "item" : "2",
+        "count" : "6"
+      }, {
+        "item" : "6",
+        "count" : "4"
+      }, {
+        "item" : "23",
+        "count" : "4"
+      }, {
+        "item" : "16",
+        "count" : "4"
+      }, {
+        "item" : "13",
+        "count" : "3"
+      }, {
+        "item" : "18",
+        "count" : "3"
+      }, {
+        "item" : "92",
+        "count" : "3"
+      }, {
+        "item" : "15",
+        "count" : "3"
+      }, {
+        "item" : "28",
+        "count" : "2"
+      }, {
+        "item" : "8",
+        "count" : "2"
+      }, {
+        "item" : "19",
+        "count" : "2"
+      }, {
+        "item" : "21",
+        "count" : "2"
+      }, {
+        "item" : "17",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      }, {
+        "item" : "40",
+        "count" : "2"
+      }, {
+        "item" : "93",
+        "count" : "2"
+      } ],
+      "smallest" : "1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760429,
+    "name" : "2015",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2015",
+    "fieldName" : "_2015",
+    "position" : 19,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369455,
+    "cachedContents" : {
+      "non_null" : "192",
+      "largest" : "97.97",
+      "null" : "127",
+      "top" : [ {
+        "item" : "3.16",
+        "count" : "2"
+      }, {
+        "item" : "1.44",
+        "count" : "2"
+      }, {
+        "item" : "4.64",
+        "count" : "2"
+      }, {
+        "item" : "5.41",
+        "count" : "1"
+      }, {
+        "item" : "12.37",
+        "count" : "1"
+      }, {
+        "item" : "13.61",
+        "count" : "1"
+      }, {
+        "item" : "1503.49",
+        "count" : "1"
+      }, {
+        "item" : "11.54",
+        "count" : "1"
+      }, {
+        "item" : "55.96",
+        "count" : "1"
+      }, {
+        "item" : "229.54",
+        "count" : "1"
+      }, {
+        "item" : "22.12",
+        "count" : "1"
+      }, {
+        "item" : "26.7",
+        "count" : "1"
+      }, {
+        "item" : "415.94",
+        "count" : "1"
+      }, {
+        "item" : "1.93",
+        "count" : "1"
+      }, {
+        "item" : "75.87",
+        "count" : "1"
+      }, {
+        "item" : "1333.11",
+        "count" : "1"
+      }, {
+        "item" : "262.52",
+        "count" : "1"
+      }, {
+        "item" : "4.72",
+        "count" : "1"
+      }, {
+        "item" : "1285.05",
+        "count" : "1"
+      }, {
+        "item" : "91.8",
+        "count" : "1"
+      } ],
+      "smallest" : "10.32",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760430,
+    "name" : "2016",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2016",
+    "fieldName" : "_2016",
+    "position" : 20,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369454,
+    "cachedContents" : {
+      "non_null" : "183",
+      "largest" : "98.39",
+      "null" : "136",
+      "top" : [ {
+        "item" : "2.2",
+        "count" : "2"
+      }, {
+        "item" : "2.57",
+        "count" : "2"
+      }, {
+        "item" : "18.67",
+        "count" : "1"
+      }, {
+        "item" : "890.62",
+        "count" : "1"
+      }, {
+        "item" : "212.79",
+        "count" : "1"
+      }, {
+        "item" : "368.15",
+        "count" : "1"
+      }, {
+        "item" : "1577.25",
+        "count" : "1"
+      }, {
+        "item" : "573.94",
+        "count" : "1"
+      }, {
+        "item" : "96.66",
+        "count" : "1"
+      }, {
+        "item" : "94.1",
+        "count" : "1"
+      }, {
+        "item" : "476.71",
+        "count" : "1"
+      }, {
+        "item" : "15.52",
+        "count" : "1"
+      }, {
+        "item" : "522.1",
+        "count" : "1"
+      }, {
+        "item" : "8.22",
+        "count" : "1"
+      }, {
+        "item" : "9.48",
+        "count" : "1"
+      }, {
+        "item" : "3128.4",
+        "count" : "1"
+      }, {
+        "item" : "157.38",
+        "count" : "1"
+      }, {
+        "item" : "2819.91",
+        "count" : "1"
+      }, {
+        "item" : "68.85",
+        "count" : "1"
+      }, {
+        "item" : "699.19",
+        "count" : "1"
+      } ],
+      "smallest" : "1030.8",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760431,
+    "name" : "2017",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2017",
+    "fieldName" : "_2017",
+    "position" : 21,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369453,
+    "cachedContents" : {
+      "non_null" : "186",
+      "largest" : "97.31",
+      "null" : "133",
+      "top" : [ {
+        "item" : "3.42",
+        "count" : "1"
+      }, {
+        "item" : "25.59",
+        "count" : "1"
+      }, {
+        "item" : "743.05",
+        "count" : "1"
+      }, {
+        "item" : "16.13",
+        "count" : "1"
+      }, {
+        "item" : "2733.71",
+        "count" : "1"
+      }, {
+        "item" : "6.82",
+        "count" : "1"
+      }, {
+        "item" : "7.88",
+        "count" : "1"
+      }, {
+        "item" : "21.35",
+        "count" : "1"
+      }, {
+        "item" : "34.68",
+        "count" : "1"
+      }, {
+        "item" : "551.52",
+        "count" : "1"
+      }, {
+        "item" : "652.72",
+        "count" : "1"
+      }, {
+        "item" : "184.52",
+        "count" : "1"
+      }, {
+        "item" : "4.59",
+        "count" : "1"
+      }, {
+        "item" : "83.95",
+        "count" : "1"
+      }, {
+        "item" : "279.18",
+        "count" : "1"
+      }, {
+        "item" : "61.01",
+        "count" : "1"
+      }, {
+        "item" : "2998.37",
+        "count" : "1"
+      }, {
+        "item" : "63.28",
+        "count" : "1"
+      }, {
+        "item" : "64.52",
+        "count" : "1"
+      }, {
+        "item" : "1414.45",
+        "count" : "1"
+      } ],
+      "smallest" : "1030.16",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760432,
+    "name" : "2018",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2018",
+    "fieldName" : "_2018",
+    "position" : 22,
+    "renderTypeName" : "text",
+    "tableColumnId" : 102369452,
+    "cachedContents" : {
+      "non_null" : "187",
+      "largest" : "987.23",
+      "null" : "132",
+      "top" : [ {
+        "item" : "2201.26",
+        "count" : "1"
+      }, {
+        "item" : "1104.11",
+        "count" : "1"
+      }, {
+        "item" : "138.36",
+        "count" : "1"
+      }, {
+        "item" : "104.01",
+        "count" : "1"
+      }, {
+        "item" : "1174.63",
+        "count" : "1"
+      }, {
+        "item" : "702.19",
+        "count" : "1"
+      }, {
+        "item" : "294.95",
+        "count" : "1"
+      }, {
+        "item" : "7.44",
+        "count" : "1"
+      }, {
+        "item" : "560.18",
+        "count" : "1"
+      }, {
+        "item" : "4.47",
+        "count" : "1"
+      }, {
+        "item" : "808.56",
+        "count" : "1"
+      }, {
+        "item" : "1.6",
+        "count" : "1"
+      }, {
+        "item" : "5.31",
+        "count" : "1"
+      }, {
+        "item" : "10.64",
+        "count" : "1"
+      }, {
+        "item" : "1454.45",
+        "count" : "1"
+      }, {
+        "item" : "811.02",
+        "count" : "1"
+      }, {
+        "item" : "46.09",
+        "count" : "1"
+      }, {
+        "item" : "2.8",
+        "count" : "1"
+      }, {
+        "item" : "280.36",
+        "count" : "1"
+      }, {
+        "item" : "882.69",
+        "count" : "1"
+      } ],
+      "smallest" : "1006.74",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760433,
+    "name" : "2019",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2019",
+    "fieldName" : "_2019",
+    "position" : 23,
+    "renderTypeName" : "text",
+    "tableColumnId" : 110204198,
+    "cachedContents" : {
+      "non_null" : "176",
+      "largest" : "9.97",
+      "null" : "143",
+      "top" : [ {
+        "item" : "4.76",
+        "count" : "2"
+      }, {
+        "item" : "1.21",
+        "count" : "2"
+      }, {
+        "item" : "16.32",
+        "count" : "1"
+      }, {
+        "item" : "200.27",
+        "count" : "1"
+      }, {
+        "item" : "183.95",
+        "count" : "1"
+      }, {
+        "item" : "8.22",
+        "count" : "1"
+      }, {
+        "item" : "3953.83",
+        "count" : "1"
+      }, {
+        "item" : "110.22",
+        "count" : "1"
+      }, {
+        "item" : "228.85",
+        "count" : "1"
+      }, {
+        "item" : "58.18",
+        "count" : "1"
+      }, {
+        "item" : "4.24",
+        "count" : "1"
+      }, {
+        "item" : "3539.45",
+        "count" : "1"
+      }, {
+        "item" : "1749.87",
+        "count" : "1"
+      }, {
+        "item" : "58.69",
+        "count" : "1"
+      }, {
+        "item" : "261.89",
+        "count" : "1"
+      }, {
+        "item" : "2990.16",
+        "count" : "1"
+      }, {
+        "item" : "118.96",
+        "count" : "1"
+      }, {
+        "item" : "54.85",
+        "count" : "1"
+      }, {
+        "item" : "321.43",
+        "count" : "1"
+      }, {
+        "item" : "501.67",
+        "count" : "1"
+      } ],
+      "smallest" : "1021.83",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760434,
+    "name" : "2020",
+    "dataTypeName" : "number",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2020",
+    "fieldName" : "_2020",
+    "position" : 24,
+    "renderTypeName" : "number",
+    "tableColumnId" : 138970612,
+    "cachedContents" : {
+      "non_null" : "172",
+      "largest" : "19333.88",
+      "null" : "147",
+      "top" : [ {
+        "item" : "1085.09",
+        "count" : "1"
+      }, {
+        "item" : "16.38",
+        "count" : "1"
+      }, {
+        "item" : "2569.39",
+        "count" : "1"
+      }, {
+        "item" : "4216.63",
+        "count" : "1"
+      }, {
+        "item" : "39.14",
+        "count" : "1"
+      }, {
+        "item" : "41.24",
+        "count" : "1"
+      }, {
+        "item" : "110.42",
+        "count" : "1"
+      }, {
+        "item" : "47.69",
+        "count" : "1"
+      }, {
+        "item" : "2468.01",
+        "count" : "1"
+      }, {
+        "item" : "13.75",
+        "count" : "1"
+      }, {
+        "item" : "1.69",
+        "count" : "1"
+      }, {
+        "item" : "34.09",
+        "count" : "1"
+      }, {
+        "item" : "179.43",
+        "count" : "1"
+      }, {
+        "item" : "7483.6",
+        "count" : "1"
+      }, {
+        "item" : "12.59",
+        "count" : "1"
+      }, {
+        "item" : "281.16",
+        "count" : "1"
+      }, {
+        "item" : "172.27",
+        "count" : "1"
+      }, {
+        "item" : "2123.03",
+        "count" : "1"
+      }, {
+        "item" : "2833.73",
+        "count" : "1"
+      }, {
+        "item" : "40.38",
+        "count" : "1"
+      } ],
+      "smallest" : "1.1",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760435,
+    "name" : "2021",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2021",
+    "fieldName" : "_2021",
+    "position" : 25,
+    "renderTypeName" : "text",
+    "tableColumnId" : 148028436,
+    "cachedContents" : {
+      "non_null" : "181",
+      "largest" : "9.92",
+      "null" : "138",
+      "top" : [ {
+        "item" : "1595.08",
+        "count" : "1"
+      }, {
+        "item" : "1.86",
+        "count" : "1"
+      }, {
+        "item" : "73.8",
+        "count" : "1"
+      }, {
+        "item" : "8737.35",
+        "count" : "1"
+      }, {
+        "item" : "575.76",
+        "count" : "1"
+      }, {
+        "item" : "41.84",
+        "count" : "1"
+      }, {
+        "item" : "100.22",
+        "count" : "1"
+      }, {
+        "item" : "1273.69",
+        "count" : "1"
+      }, {
+        "item" : "417.48",
+        "count" : "1"
+      }, {
+        "item" : "142.44",
+        "count" : "1"
+      }, {
+        "item" : "22229.6",
+        "count" : "1"
+      }, {
+        "item" : "781.94",
+        "count" : "1"
+      }, {
+        "item" : "249.03",
+        "count" : "1"
+      }, {
+        "item" : "161.45",
+        "count" : "1"
+      }, {
+        "item" : "475.39",
+        "count" : "1"
+      }, {
+        "item" : "63.54",
+        "count" : "1"
+      }, {
+        "item" : "325.62",
+        "count" : "1"
+      }, {
+        "item" : "4.72",
+        "count" : "1"
+      }, {
+        "item" : "3059.39",
+        "count" : "1"
+      }, {
+        "item" : "1152.82",
+        "count" : "1"
+      } ],
+      "smallest" : "100.22",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760436,
+    "name" : "2022",
+    "dataTypeName" : "text",
+    "description" : "Cantidad de hectáreas de cultivos de coca detectadas en el año 2022",
+    "fieldName" : "_2022",
+    "position" : 26,
+    "renderTypeName" : "text",
+    "tableColumnId" : 148756764,
+    "cachedContents" : {
+      "non_null" : "185",
+      "largest" : "98.87",
+      "null" : "134",
+      "top" : [ {
+        "item" : "45.02",
+        "count" : "2"
+      }, {
+        "item" : "30.87",
+        "count" : "2"
+      }, {
+        "item" : "28.21",
+        "count" : "1"
+      }, {
+        "item" : "376.23",
+        "count" : "1"
+      }, {
+        "item" : "25.3",
+        "count" : "1"
+      }, {
+        "item" : "3.94",
+        "count" : "1"
+      }, {
+        "item" : "959.31",
+        "count" : "1"
+      }, {
+        "item" : "16.46",
+        "count" : "1"
+      }, {
+        "item" : "3085.97",
+        "count" : "1"
+      }, {
+        "item" : "425.3",
+        "count" : "1"
+      }, {
+        "item" : "123.48",
+        "count" : "1"
+      }, {
+        "item" : "520.37",
+        "count" : "1"
+      }, {
+        "item" : "445.79",
+        "count" : "1"
+      }, {
+        "item" : "3451.51",
+        "count" : "1"
+      }, {
+        "item" : "48.86",
+        "count" : "1"
+      }, {
+        "item" : "91.63",
+        "count" : "1"
+      }, {
+        "item" : "676.78",
+        "count" : "1"
+      }, {
+        "item" : "262.68",
+        "count" : "1"
+      }, {
+        "item" : "81.93",
+        "count" : "1"
+      }, {
+        "item" : "48.77",
+        "count" : "1"
+      } ],
+      "smallest" : "10",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760437,
+    "name" : "2023",
+    "dataTypeName" : "text",
+    "description" : "\t Cantidad de hectáreas de cultivos de coca detectadas en el año 2023",
+    "fieldName" : "_2023",
+    "position" : 27,
+    "renderTypeName" : "text",
+    "tableColumnId" : 155628277,
+    "cachedContents" : {
+      "non_null" : "181",
+      "largest" : "95.73",
+      "null" : "138",
+      "top" : [ {
+        "item" : "1597.45",
+        "count" : "1"
+      }, {
+        "item" : "1743.12",
+        "count" : "1"
+      }, {
+        "item" : "2103.83",
+        "count" : "1"
+      }, {
+        "item" : "4299.81",
+        "count" : "1"
+      }, {
+        "item" : "846.05",
+        "count" : "1"
+      }, {
+        "item" : "1159.81",
+        "count" : "1"
+      }, {
+        "item" : "1471.27",
+        "count" : "1"
+      }, {
+        "item" : "427.12",
+        "count" : "1"
+      }, {
+        "item" : "109.44",
+        "count" : "1"
+      }, {
+        "item" : "537",
+        "count" : "1"
+      }, {
+        "item" : "52.07",
+        "count" : "1"
+      }, {
+        "item" : "3956.28",
+        "count" : "1"
+      }, {
+        "item" : "848.96",
+        "count" : "1"
+      }, {
+        "item" : "343.3",
+        "count" : "1"
+      }, {
+        "item" : "8731.71",
+        "count" : "1"
+      }, {
+        "item" : "9.48",
+        "count" : "1"
+      }, {
+        "item" : "10.28",
+        "count" : "1"
+      }, {
+        "item" : "13.94",
+        "count" : "1"
+      }, {
+        "item" : "6864.19",
+        "count" : "1"
+      }, {
+        "item" : "16.01",
+        "count" : "1"
+      } ],
+      "smallest" : "100.76",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  }, {
+    "id" : 636760438,
+    "name" : "2024",
+    "dataTypeName" : "text",
+    "description" : "",
+    "fieldName" : "_2024",
+    "position" : 28,
+    "renderTypeName" : "text",
+    "tableColumnId" : 169067614,
+    "cachedContents" : {
+      "non_null" : "180",
+      "largest" : "9893.39",
+      "null" : "139",
+      "top" : [ {
+        "item" : "55.58",
+        "count" : "1"
+      }, {
+        "item" : "508.28",
+        "count" : "1"
+      }, {
+        "item" : "1167.26",
+        "count" : "1"
+      }, {
+        "item" : "1692.49",
+        "count" : "1"
+      }, {
+        "item" : "165.84",
+        "count" : "1"
+      }, {
+        "item" : "1035.85",
+        "count" : "1"
+      }, {
+        "item" : "2836.32",
+        "count" : "1"
+      }, {
+        "item" : "4008.42",
+        "count" : "1"
+      }, {
+        "item" : "7668.73",
+        "count" : "1"
+      }, {
+        "item" : "5949.63",
+        "count" : "1"
+      }, {
+        "item" : "27.12",
+        "count" : "1"
+      }, {
+        "item" : "27.71",
+        "count" : "1"
+      }, {
+        "item" : "3042.44",
+        "count" : "1"
+      }, {
+        "item" : "469.54",
+        "count" : "1"
+      }, {
+        "item" : "8968.19",
+        "count" : "1"
+      }, {
+        "item" : "2831.83",
+        "count" : "1"
+      }, {
+        "item" : "907.37",
+        "count" : "1"
+      }, {
+        "item" : "16.65",
+        "count" : "1"
+      }, {
+        "item" : "345.77",
+        "count" : "1"
+      }, {
+        "item" : "1392.53",
+        "count" : "1"
+      } ],
+      "smallest" : "10.05",
+      "count" : "319",
+      "cardinality" : "319"
+    },
+    "format" : { }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "Creative Commons Attribution | Share Alike 4.0 International",
+    "logoUrl" : "images/licenses/cc30bysa.png",
+    "termsLink" : "http://creativecommons.org/licenses/by-sa/4.0/legalcode"
+  },
+  "metadata" : {
+    "custom_fields" : {
+      "Información de la Entidad" : {
+        "Municipio" : "Bogotá D.C.",
+        "Nombre de la Entidad" : "Ministerio de Justicia y del derecho - MinJusticia, Bogotá D.C.",
+        "DIVIPOLA Municipio" : "11001",
+        "Orden" : "Nacional",
+        "Sector" : "Justicia y Derecho",
+        "Área o dependencia" : "Observatorio de Drogas de Colombia",
+        "Departamento" : "Bogotá D.C."
+      },
+      "Información de Datos" : {
+        "Cobertura Geográfica" : "Nacional",
+        "Idioma" : "Español",
+        "Frecuencia de Actualización" : "Anual"
+      }
+    },
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ]
+  },
+  "owner" : {
+    "id" : "8ek4-hyhr",
+    "displayName" : "Ministerio de Justicia y del Derecho",
+    "profileImageUrlLarge" : "/api/users/8ek4-hyhr/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/8ek4-hyhr/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/8ek4-hyhr/profile_images/TINY",
+    "screenName" : "Ministerio de Justicia y del Derecho",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "8ek4-hyhr",
+    "displayName" : "Ministerio de Justicia y del Derecho",
+    "profileImageUrlLarge" : "/api/users/8ek4-hyhr/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/8ek4-hyhr/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/8ek4-hyhr/profile_images/TINY",
+    "screenName" : "Ministerio de Justicia y del Derecho",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "tags" : [ "hectáreas cultivadas coca", "coca", "hectáreas", "cultivos de coca" ],
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

@@ -1,0 +1,962 @@
+<title>Coca en Colombia por zonas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: una plancha de levantamiento. Bloque de título arriba, mapa con marco y graticula a la izquierda,
+   cuadro de zonas a la derecha, serie histórica y tabla debajo, notas de método al pie. */
+:root {
+  --paper: #eef0e9;
+  --sheet: #fbfbf8;
+  --ink: #18201b;
+  --ink-2: #48514a;
+  --ink-3: #737b74;
+  --rule: #c9cdc2;
+  --rule-soft: #e1e4dc;
+  --none: #e4e7de;
+  --q1: #e59b5b; --q2: #cf8246; --q3: #b86931; --q4: #a2501c; --q5: #8b3802; --q6: #751f00; --q7: #5e0000;
+  --z-norte: #2f6db3; --z-sur: #138a72; --z-pacifico: #7a5bd0; --z-resto: #8b8f86;
+  --focus: #2f6db3;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #101411; --sheet: #171c18; --ink: #e9ece4; --ink-2: #b8bfb4; --ink-3: #8c948a;
+    --rule: #39423b; --rule-soft: #262d28; --none: #232a25;
+    --q1: #8b320b; --q2: #9f4a21; --q3: #b46336; --q4: #c87b4a; --q5: #db9460; --q6: #efad76; --q7: #ffc78e;
+    --z-norte: #5a8fdc; --z-sur: #16a07f; --z-pacifico: #9077dc; --z-resto: #7d827a;
+    --focus: #7fb0f0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #101411; --sheet: #171c18; --ink: #e9ece4; --ink-2: #b8bfb4; --ink-3: #8c948a;
+  --rule: #39423b; --rule-soft: #262d28; --none: #232a25;
+  --q1: #8b320b; --q2: #9f4a21; --q3: #b46336; --q4: #c87b4a; --q5: #db9460; --q6: #efad76; --q7: #ffc78e;
+  --z-norte: #5a8fdc; --z-sur: #16a07f; --z-pacifico: #9077dc; --z-resto: #7d827a;
+  --focus: #7fb0f0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.sheet { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.05; }
+p { margin: 0; }
+.eyebrow { font: 500 11px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Bloque de título */
+.title-block {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end;
+  border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); padding-block: 14px 18px;
+}
+.title-block h1 { font-size: clamp(38px, 6vw, 68px); letter-spacing: -.01em; margin-top: 6px; }
+.title-block .lede { color: var(--ink-2); max-width: 62ch; margin-top: 10px; }
+.headline { text-align: right; display: grid; gap: 2px; }
+.headline .big { font: 500 clamp(34px, 5vw, 54px)/1 var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.headline .big small { font-size: .42em; color: var(--ink-2); letter-spacing: 0; margin-left: 4px; }
+.headline .sub { color: var(--ink-2); font-size: 14px; }
+.chip-note { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--ink-2); border: 1px dashed var(--rule); padding: 3px 8px; border-radius: 2px; text-align: left; max-width: 36ch; justify-self: end; }
+
+/* Controles */
+.controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px;
+  padding: 12px 14px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px;
+}
+.year-ctl { display: flex; align-items: center; gap: 12px; flex: 1 1 360px; min-width: 0; }
+.year-ctl output { font: 600 30px/1 var(--display); font-variant-numeric: tabular-nums; min-width: 2.4em; }
+.year-ctl input[type=range] { flex: 1; min-width: 0; accent-color: var(--q4); height: 28px; }
+.icon-btn {
+  display: inline-grid; place-items: center; width: 38px; height: 38px; flex: none;
+  border: 1px solid var(--ink); background: var(--sheet); color: var(--ink); border-radius: 50%; cursor: pointer;
+}
+.icon-btn:hover { background: var(--ink); color: var(--sheet); }
+.icon-btn svg { width: 16px; height: 16px; }
+.seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden; }
+.seg button {
+  font: 600 13px/1 var(--body); padding: 9px 12px; border: 0; background: transparent; color: var(--ink); cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.ctl-group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ctl-label { font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.text-btn {
+  font: 600 13px/1 var(--body); padding: 9px 12px; border: 1px solid var(--rule); background: transparent; color: var(--ink);
+  border-radius: 3px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+}
+.text-btn:hover { border-color: var(--ink); }
+.text-btn svg { width: 15px; height: 15px; }
+
+/* Mapa + zonas */
+.main { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 960px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.map-wrap { position: relative; background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px; padding: 10px; min-width: 0; margin: 0; }
+#map { display: block; width: 100%; height: auto; touch-action: manipulation; }
+#map .lvl path { stroke: var(--sheet); stroke-width: .35; transition: fill .35s ease; }
+#map .lvl-dpto path { stroke-width: .6; }
+#map .zg { transition: opacity .25s ease; }
+#map[data-focus] .zg { opacity: .2; }
+#map[data-focus="norte"] .z-norte, #map[data-focus="sur"] .z-sur, #map[data-focus="pacifico"] .z-pacifico, #map[data-focus="resto"] .z-resto { opacity: 1; }
+#map .zone-hl { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linejoin: round; display: none; pointer-events: none; }
+#map[data-focus="norte"] .hl-norte, #map[data-focus="sur"] .hl-sur, #map[data-focus="pacifico"] .hl-pacifico, #map[data-focus="resto"] .hl-resto { display: inline; }
+.q0 { fill: var(--none); } .q1 { fill: var(--q1); } .q2 { fill: var(--q2); } .q3 { fill: var(--q3); } .q4 { fill: var(--q4); }
+.q5 { fill: var(--q5); } .q6 { fill: var(--q6); } .q7 { fill: var(--q7); }
+#map .dept-mesh { fill: none; stroke: var(--ink-3); stroke-width: .6; stroke-opacity: .8; pointer-events: none; }
+#map .zone-mesh { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; pointer-events: none; }
+#map .outline { fill: none; stroke: var(--ink); stroke-width: 1.1; pointer-events: none; }
+#map .grat { fill: none; stroke: var(--rule); stroke-width: .6; stroke-dasharray: 2 3; }
+#map .grat-label { font: 400 9.5px var(--mono); fill: var(--ink-3); }
+#map .neat-outer { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+#map .neat-inner { fill: none; stroke: var(--ink); stroke-width: .4; }
+#map .zlabel .name { font: 700 17px var(--display); letter-spacing: .14em; fill: var(--ink); }
+#map .zlabel .val { font: 500 11px var(--mono); fill: var(--ink); }
+#map .zlabel text { paint-order: stroke; stroke: var(--sheet); stroke-width: 3.5px; stroke-linejoin: round; pointer-events: none; }
+#map .furn { fill: var(--ink); }
+#map .furn-text { font: 500 9.5px var(--mono); fill: var(--ink-2); letter-spacing: .06em; }
+#map .inset-box { fill: var(--sheet); stroke: var(--ink-2); stroke-width: .7; }
+#map .hit { cursor: pointer; }
+
+.legend { display: grid; gap: 6px; margin: 6px 4px 2px; }
+.legend-title { font-size: 13px; color: var(--ink-2); }
+.legend-title b { color: var(--ink); font-weight: 600; }
+.legend-row { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+.legend-none { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); padding-top: 1px; }
+.legend-none i { width: 22px; height: 12px; background: var(--none); border: 1px solid var(--rule); display: block; }
+.ramp { flex: 1 1 280px; min-width: 0; padding-right: 14px; }
+.ramp-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; height: 12px; }
+.ramp-bar i { display: block; }
+.ramp-ticks { position: relative; height: 16px; font: 400 10.5px var(--mono); color: var(--ink-2); }
+.ramp-ticks span { position: absolute; top: 3px; transform: translateX(-50%); white-space: nowrap; }
+
+.tt {
+  position: absolute; pointer-events: none; z-index: 5; min-width: 200px; max-width: 260px;
+  background: var(--sheet); color: var(--ink); border: 1px solid var(--ink); border-radius: 3px;
+  padding: 10px 12px; box-shadow: 0 6px 18px -8px rgb(0 0 0 / .35); font-size: 13px;
+}
+.tt b { font: 600 18px/1.1 var(--display); display: block; }
+.tt .where { color: var(--ink-2); font-size: 12px; display: block; margin-bottom: 6px; }
+.tt dl { display: grid; grid-template-columns: auto auto; gap: 2px 12px; margin: 0; }
+.tt dt { color: var(--ink-2); }
+.tt dd { margin: 0; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12px; }
+.tt .empty { color: var(--ink-2); font-style: italic; }
+.tt .tsw { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 1px; }
+.tt .total dt, .tt .total dd { color: var(--ink); font-weight: 600; border-top: 1px solid var(--rule); padding-top: 3px; }
+
+/* Cuadro de zonas */
+.zones { display: grid; background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px; min-width: 0; }
+.zones header { padding: 14px 16px 10px; border-bottom: 1px solid var(--ink); display: grid; gap: 4px; }
+.zones header h2 { font-size: 26px; }
+.zrow {
+  display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline;
+  text-align: left; width: 100%; padding: 12px 16px; border: 0; border-bottom: 1px solid var(--rule-soft);
+  background: transparent; color: inherit; font: inherit; cursor: pointer;
+}
+.zrow:hover, .zrow.is-focus { background: var(--rule-soft); }
+.zrow .sw { width: 12px; height: 12px; border-radius: 1px; align-self: center; }
+.zrow .zname { font: 600 21px/1.1 var(--display); letter-spacing: .02em; }
+.zrow .zval { font: 500 18px/1.1 var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+.zrow .zval small, .ztotal .zval small { font-size: 11px; color: var(--ink-2); margin-left: 3px; }
+.zrow .zdesc { grid-column: 2 / 4; font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
+.zrow .zmeta { grid-column: 2 / 4; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.zrow .zmeta .num { color: var(--ink); }
+.zrow .spark { grid-column: 2 / 4; width: 100%; height: 34px; display: block; margin-top: 4px; overflow: visible; }
+.spark .base { stroke: var(--rule); stroke-width: 1; }
+.spark .line { fill: none; stroke-width: 1.6; }
+.spark .yr { stroke: var(--ink-3); stroke-width: .8; stroke-dasharray: 2 2; }
+.ztotal { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 14px 16px; border-top: 1px solid var(--ink); align-items: baseline; }
+.ztotal .zname { font: 600 19px/1.1 var(--display); letter-spacing: .04em; text-transform: uppercase; }
+.ztotal .zval { font: 500 20px/1.1 var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+.ztotal .zmeta { grid-column: 1 / 3; font-size: 13px; color: var(--ink-2); }
+.delta-up::before { content: "▲ "; font-size: .8em; }
+.delta-down::before { content: "▼ "; font-size: .8em; }
+
+/* Serie histórica */
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-radius: 3px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 8px 24px; border-bottom: 1px solid var(--ink); padding-bottom: 10px; }
+.panel-head h2 { font-size: 28px; }
+.panel-head p { color: var(--ink-2); font-size: 14px; max-width: 70ch; }
+.series-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); }
+.series-legend span { display: inline-flex; gap: 6px; align-items: center; }
+.series-legend i { width: 12px; height: 12px; border-radius: 1px; display: block; }
+.chart-wrap { position: relative; min-width: 0; overflow-x: auto; }
+#series { width: 100%; min-width: 560px; height: auto; display: block; }
+#series .area { stroke: var(--sheet); stroke-width: 1.5; }
+#series .axis text { font: 400 11px var(--mono); fill: var(--ink-2); }
+#series .grid line { stroke: var(--rule-soft); }
+#series .baseline { stroke: var(--ink); stroke-width: 1; }
+#series .cur { stroke: var(--ink); stroke-width: 1.4; }
+#series .cur-label { font: 600 13px var(--display); fill: var(--ink); letter-spacing: .04em; }
+#series .hover-line { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
+#series .ann line { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 1 3; }
+#series .ann .leader { stroke-dasharray: none; }
+#series .ann circle { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; }
+#series .ann text { font: 600 10px var(--mono); fill: var(--ink); }
+#series .dlabel { font: 600 12px var(--display); letter-spacing: .06em; fill: var(--ink); }
+#series .dlabel-v { font: 400 10.5px var(--mono); fill: var(--ink-2); }
+#series .ytitle { font: 500 10px var(--mono); fill: var(--ink-3); letter-spacing: .1em; text-transform: uppercase; }
+.ann-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13.5px; color: var(--ink-2); }
+.ann-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; }
+.ann-list .n { display: inline-grid; place-items: center; width: 20px; height: 20px; border: 1px solid var(--ink); border-radius: 50%; font: 600 10px var(--mono); color: var(--ink); }
+.ann-list b { color: var(--ink); font-weight: 600; }
+
+/* Tabla */
+.table-wrap { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--rule-soft); text-align: left; white-space: nowrap; }
+th { font: 500 10.5px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--ink); }
+td.r, th.r { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td .sw { display: inline-block; width: 10px; height: 10px; border-radius: 1px; margin-right: 6px; vertical-align: -1px; }
+td.rank { color: var(--ink-3); font-family: var(--mono); }
+
+/* Notas */
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px 32px; border-top: 3px solid var(--ink); padding-top: 16px; }
+.notes section { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.notes h3 { font-size: 20px; letter-spacing: .02em; }
+.notes p, .notes li { font-size: 14px; color: var(--ink-2); max-width: 68ch; }
+.notes ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.notes a { color: var(--ink); text-underline-offset: 2px; }
+.notes b { color: var(--ink); font-weight: 600; }
+.choco { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px 20px; }
+.choco h4 { font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin: 0 0 4px; }
+.choco ul { list-style: none; padding: 0; display: block; columns: 2; column-gap: 16px; }
+.choco li { font-size: 13px; }
+.choco li span { color: var(--ink-3); font-size: 12px; }
+.colophon { font: 400 11px/1.6 var(--mono); color: var(--ink-3); letter-spacing: .04em; grid-column: 1 / -1; }
+.toast { font-size: 13px; color: var(--ink-2); }
+
+@media (max-width: 640px) {
+  .title-block { grid-template-columns: minmax(0, 1fr); }
+  .headline { text-align: left; }
+  .chip-note { justify-self: start; }
+  .controls { padding: 10px; }
+  .map-wrap { padding: 4px; }
+  #map .zlabel .name { font-size: 27px; }
+  #map .zlabel .val { font-size: 17px; }
+  #map .grat-label { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="sheet">
+  <header class="title-block">
+    <div>
+      <p class="eyebrow">Censo SIMCI · UNODC y Gobierno de Colombia · 2001–2024</p>
+      <h1>Coca en Colombia por zonas</h1>
+      <p class="lede">Hectáreas de coca detectadas a 31 de diciembre de cada año, municipio por municipio, agrupadas en cuatro zonas: Norte, Sur, Pacífico y el resto del país.</p>
+    </div>
+    <div class="headline">
+      <span class="eyebrow" id="hl-eyebrow">Total nacional · 2024</span>
+      <span class="big" id="hl-total">—</span>
+      <span class="sub" id="hl-sub"></span>
+      <span class="chip-note" id="hl-note" hidden></span>
+    </div>
+  </header>
+
+  <div class="controls" role="group" aria-label="Controles del mapa">
+    <div class="year-ctl">
+      <button class="icon-btn" id="play" type="button" aria-label="Reproducir la serie 2001–2024" title="Reproducir la serie 2001–2024">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" id="play-icon"><path d="M7 4.5v15l12-7.5z"/></svg>
+      </button>
+      <output id="year-out" for="year">2024</output>
+      <input type="range" id="year" min="2001" max="2024" step="1" value="2024" aria-label="Año del censo">
+    </div>
+    <div class="ctl-group">
+      <span class="ctl-label">Medida</span>
+      <div class="seg" role="group" aria-label="Medida">
+        <button type="button" id="m-ha" aria-pressed="true">Hectáreas</button>
+        <button type="button" id="m-dens" aria-pressed="false">Densidad</button>
+      </div>
+    </div>
+    <div class="ctl-group">
+      <span class="ctl-label">Unidad</span>
+      <div class="seg" role="group" aria-label="Unidad del mapa">
+        <button type="button" id="l-mpio" aria-pressed="true">Municipios</button>
+        <button type="button" id="l-dpto" aria-pressed="false">Departamentos</button>
+      </div>
+    </div>
+    <button type="button" class="text-btn" id="png" hidden title="Guardar el mapa del año seleccionado como imagen PNG para imprimir">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      Guardar PNG
+    </button>
+    <span class="toast" id="toast" role="status"></span>
+  </div>
+
+  <div class="main">
+    <figure class="map-wrap">
+      <svg id="map" role="img" aria-labelledby="map-title"><title id="map-title">Mapa de Colombia con las hectáreas de coca por municipio y los límites de las cuatro zonas</title></svg>
+      <div class="legend" id="legend"></div>
+      <div class="tt" id="tt" hidden></div>
+    </figure>
+
+    <aside class="zones" aria-label="Resumen por zona">
+      <header>
+        <span class="eyebrow" id="zones-eyebrow">Cuadro de zonas · 2024</span>
+        <h2>Las cuatro zonas</h2>
+      </header>
+      <div id="zone-rows"></div>
+      <div class="ztotal">
+        <span class="zname">Total nacional</span>
+        <span class="zval" id="tot-val"></span>
+        <span class="zmeta" id="tot-meta"></span>
+      </div>
+    </aside>
+  </div>
+
+  <section class="panel" aria-labelledby="series-title">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Serie histórica 2001–2024</p>
+        <h2 id="series-title">Evolución por zona</h2>
+      </div>
+      <p>Área sembrada a 31 de diciembre de cada año, apilada por zona. Toca un año en la gráfica para verlo en el mapa.</p>
+    </div>
+    <div class="series-legend" id="series-legend"></div>
+    <div class="chart-wrap">
+      <svg id="series" role="img" aria-label="Gráfico de áreas apiladas con las hectáreas de coca por zona entre 2001 y 2024"></svg>
+      <div class="tt" id="tt2" hidden></div>
+    </div>
+    <ol class="ann-list" id="ann-list"></ol>
+  </section>
+
+  <section class="panel" aria-labelledby="top-title">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow" id="top-eyebrow">Municipios · 2024</p>
+        <h2 id="top-title">Los 15 municipios con más coca</h2>
+      </div>
+      <p id="top-sub"></p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Municipio</th><th>Departamento</th><th>Zona</th><th class="r">Hectáreas</th><th class="r">% nacional</th><th class="r" id="th-delta">Cambio</th><th class="r">ha/km²</th></tr></thead>
+        <tbody id="top-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="notes">
+    <section>
+      <h3>Fuentes</h3>
+      <ul>
+        <li><b>Datos municipales:</b> «Detección de cultivos de coca (hectáreas)», Ministerio de Justicia y del Derecho – Observatorio de Drogas de Colombia, con base en el censo del Sistema Integrado de Monitoreo de Cultivos Ilícitos (SIMCI) de UNODC y el Gobierno de Colombia. <a href="https://www.datos.gov.co/d/acs4-3wgp" target="_blank" rel="noopener">datos.gov.co, conjunto acs4-3wgp</a>, actualizado el 8 de julio de 2026.</li>
+        <li><b>Informe de referencia:</b> UNODC-SIMCI, <a href="https://www.unodc.org/rocol/uploads/documents/2026/InformeCC2024/Monitoreo_de_Cultivos_de_Coca_2024.pdf" target="_blank" rel="noopener"><i>Monitoreo de territorios con presencia de cultivos de coca 2024</i></a>, Bogotá, junio de 2026.</li>
+        <li><b>Límites municipales:</b> Marco Geoestadístico Nacional 2018 del DANE, en la versión simplificada de <a href="https://www.npmjs.com/package/@john-guerra/geo-colombia" target="_blank" rel="noopener">@john-guerra/geo-colombia</a> (licencia MIT).</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Validación de las cifras</h3>
+      <p id="val-text"></p>
+      <p>UNODC redondea la cifra nacional a miles: 253.000 ha en 2023 y 261.000 ha en 2024. Aquí se muestran las sumas exactas del archivo municipal.</p>
+    </section>
+    <section>
+      <h3>Zonas</h3>
+      <ul>
+        <li><b>Norte:</b> Norte de Santander, Antioquia, Córdoba, Bolívar y el norte del Chocó.</li>
+        <li><b>Sur:</b> Putumayo y Caquetá.</li>
+        <li><b>Pacífico:</b> Nariño.</li>
+        <li><b>Resto del país:</b> los demás departamentos, incluidos Cauca, Valle del Cauca y el sur del Chocó.</li>
+      </ul>
+      <p>El Chocó se divide por subregiones: Darién, Atrato y Pacífico Norte van al Norte; San Juan y Pacífico Sur (Baudó y Litoral del San Juan) van al resto del país.</p>
+      <div class="choco" id="choco"></div>
+    </section>
+    <section>
+      <h3>Método</h3>
+      <ul>
+        <li>El área corresponde a la coca presente a 31 de diciembre de cada año, detectada por el censo SIMCI con imágenes de satélite. Un municipio sin valor en el archivo se muestra como «sin coca detectada».</li>
+        <li><b>Densidad:</b> hectáreas de coca por km² de superficie municipal (área del MGN 2018). 1 ha/km² equivale al 1 % del territorio del municipio.</li>
+        <li><b>Clases del mapa:</b> cortes fijos en escala aproximadamente logarítmica, iguales para todos los años, para que los municipios con poca coca sigan siendo visibles y los años se puedan comparar.</li>
+        <li><b>Proyección:</b> transversa de Mercator con meridiano central 73° O y latitud de origen 4° N, los parámetros del origen único nacional MAGNA-SIRGAS. El archipiélago de San Andrés aparece en un recuadro fuera de escala.</li>
+        <li>Los límites son los de 2018: municipios creados después, como Belén de Bajirá, quedan dentro de los municipios de los que se segregaron.</li>
+      </ul>
+    </section>
+    <p class="colophon">Datos y código reproducibles: scripts/build.py en el repositorio mapascoca. Cifras en hectáreas, formato colombiano (punto de miles, coma decimal).</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+const DATA = /*__DATA__*/null;
+const TOPO = /*__TOPO__*/null;
+
+const YEARS = DATA.years, NY = YEARS.length;
+const ZONES = DATA.zones.map(z => z.id);
+const ZNAME = Object.fromEntries(DATA.zones.map(z => [z.id, z.name]));
+const ZDESC = {
+  norte: "Norte de Santander, Antioquia, Córdoba, Bolívar y norte del Chocó",
+  sur: "Putumayo y Caquetá",
+  pacifico: "Nariño",
+  resto: "Cauca, Valle del Cauca, Guaviare, Meta, sur del Chocó y demás departamentos",
+};
+const ANNOTATIONS = [
+  { date: [2015, 10, 1], label: "Oct. 2015", text: "Termina la aspersión aérea con glifosato, por la Resolución 006 de 2015 del Consejo Nacional de Estupefacientes." },
+  { date: [2016, 11, 24], label: "Nov. 2016", text: "Firma del Acuerdo Final de Paz; su punto 4 trata la solución al problema de las drogas ilícitas." },
+  { date: [2017, 5, 29], label: "May. 2017", text: "El Decreto Ley 896 de 2017 crea el Programa Nacional Integral de Sustitución de Cultivos de Uso Ilícito (PNIS)." },
+];
+const BREAKS = {
+  mpio: { ha: [10, 100, 500, 1000, 2500, 5000], dens: [0.05, 0.2, 0.5, 1, 2.5, 5] },
+  dpto: { ha: [100, 1000, 5000, 10000, 25000, 50000], dens: [0.01, 0.05, 0.1, 0.25, 0.5, 1.5] },
+};
+// Paleta clara fija para la imagen PNG (pensada para imprimir)
+const PRINT = {
+  paper: "#fbfbf8", ink: "#18201b", ink2: "#48514a", ink3: "#737b74", rule: "#c9cdc2", none: "#e4e7de",
+  q: ["#e4e7de", "#e59b5b", "#cf8246", "#b86931", "#a2501c", "#8b3802", "#751f00", "#5e0000"],
+  z: { norte: "#2f6db3", sur: "#138a72", pacifico: "#7a5bd0", resto: "#8b8f86" },
+};
+
+const loc = d3.formatLocale({ decimal: ",", thousands: ".", grouping: [3], currency: ["$", ""] });
+const fInt = loc.format(",.0f");
+const f1 = loc.format(",.1f");
+const fDens = v => v >= 10 ? loc.format(",.1f")(v) : loc.format(",.2f")(v);
+const fBreak = v => v < 1 ? loc.format(",.2~f")(v) : fInt(v);
+const fPct = v => f1(v) + " %";
+const signed = (v, f) => (v > 0 ? "+" : v < 0 ? "−" : "±") + f(Math.abs(v));
+
+const state = { i: NY - 1, metric: "ha", level: "mpio", focus: null, pinned: false };
+
+// --- Datos derivados --------------------------------------------------------
+const geoms = TOPO.objects.municipios.geometries;
+const M = DATA.munis;
+const zoneOfGeom = g => M[g.properties.c].z;
+const national = YEARS.map((_, i) => d3.sum(Object.values(M), m => m.s ? m.s[i] : 0));
+const zoneTot = Object.fromEntries(ZONES.map(z => [z, YEARS.map((_, i) => d3.sum(Object.values(M), m => m.z === z && m.s ? m.s[i] : 0))]));
+
+// Unidades departamentales: departamento × zona (el Chocó queda partido en norte y sur)
+const units = d3.groups(geoms, g => M[g.properties.c].d + "|" + M[g.properties.c].z).map(([key, gs]) => {
+  const [d, z] = key.split("|");
+  const ms = gs.map(g => M[g.properties.c]);
+  const s = YEARS.map((_, i) => d3.sum(ms, m => m.s ? m.s[i] : 0));
+  let name = DATA.depts[d];
+  if (d === "27") name += z === "norte" ? " (norte)" : " (sur)";
+  return { key, d, z, name, s, a: d3.sum(ms, m => m.a), geom: topojson.merge(TOPO, gs) };
+});
+const unitByKey = Object.fromEntries(units.map(u => [u.key, u]));
+
+// --- Mapa -----------------------------------------------------------------
+const W = 760, H = 900;
+const svg = d3.select("#map").attr("viewBox", `0 0 ${W} ${H}`);
+const isIsland = g => g.properties.d === "88";
+const obj = { type: "GeometryCollection", geometries: geoms.filter(g => !isIsland(g)) };
+const islandObj = { type: "GeometryCollection", geometries: geoms.filter(isIsland) };
+const mainland = topojson.feature(TOPO, obj);
+const FRAME = { x0: 14, y0: 14, x1: W - 14, y1: H - 14 };
+const proj = d3.geoTransverseMercator().rotate([73, 0]).fitExtent([[60, 40], [W - 34, H - 40]], mainland);
+const path = d3.geoPath(proj);
+const islandProj = d3.geoTransverseMercator().rotate([81.5, 0]).fitExtent([[40, 52], [96, 140]], topojson.feature(TOPO, islandObj));
+const islandPath = d3.geoPath(islandProj);
+const deptOf = g => g.properties.d;
+const MESH = {
+  dept: topojson.mesh(TOPO, obj, (a, b) => a !== b && deptOf(a) !== deptOf(b)),
+  outline: topojson.mesh(TOPO, obj, (a, b) => a === b),
+  zone: topojson.mesh(TOPO, obj, (a, b) => a !== b && zoneOfGeom(a) !== zoneOfGeom(b)),
+};
+
+svg.append("defs").append("clipPath").attr("id", "frame-clip")
+  .append("rect").attr("x", FRAME.x0).attr("y", FRAME.y0).attr("width", FRAME.x1 - FRAME.x0).attr("height", FRAME.y1 - FRAME.y0);
+
+// Graticula cada 2°
+svg.append("g").attr("clip-path", "url(#frame-clip)").append("path").attr("class", "grat")
+  .attr("d", path(d3.geoGraticule().extent([[-84, -8], [-64, 16]]).step([2, 2])()));
+const gGratLabels = svg.append("g");
+for (let lat = -4; lat <= 12; lat += 2) {
+  let pt = null;
+  for (let lon = -84; lon <= -64; lon += 0.02) { const p = proj([lon, lat]); if (p[0] >= FRAME.x0 + 4) { pt = p; break; } }
+  if (pt && pt[1] > 176 && pt[1] < FRAME.y1 - 8)
+    gGratLabels.append("text").attr("class", "grat-label").attr("x", FRAME.x0 + 6).attr("y", pt[1] - 3)
+      .text(lat === 0 ? "0°" : `${Math.abs(lat)}° ${lat > 0 ? "N" : "S"}`);
+}
+for (let lon = -78; lon <= -68; lon += 2) {
+  let pt = null;
+  for (let lat = -8; lat <= 16; lat += 0.02) { const p = proj([lon, lat]); if (p[1] <= FRAME.y1 - 4) { pt = p; break; } }
+  if (pt && pt[0] > FRAME.x0 + 20 && pt[0] < FRAME.x1 - 20)
+    gGratLabels.append("text").attr("class", "grat-label").attr("x", pt[0] + 3).attr("y", FRAME.y1 - 6).text(`${Math.abs(lon)}° O`);
+}
+
+// Rellenos por zona (municipios y departamentos)
+const gM = svg.append("g").attr("class", "lvl lvl-mpio");
+const gD = svg.append("g").attr("class", "lvl lvl-dpto").attr("display", "none");
+const muniEls = [], unitEls = [];
+for (const z of ZONES) {
+  const gz = gM.append("g").attr("class", `zg z-${z}`);
+  for (const g of obj.geometries.filter(g => zoneOfGeom(g) === z)) {
+    const code = g.properties.c;
+    const feature = topojson.feature(TOPO, g);
+    const el = gz.append("path").attr("d", path(feature)).attr("class", "q0 hit").node();
+    el.dataset.code = code;
+    muniEls.push({ el, m: M[code], feature });
+  }
+  const gdz = gD.append("g").attr("class", `zg z-${z}`);
+  for (const u of units.filter(u => u.z === z && u.d !== "88")) {
+    const el = gdz.append("path").attr("d", path(u.geom)).attr("class", "q0 hit").node();
+    el.dataset.unit = u.key;
+    unitEls.push({ el, u });
+  }
+}
+
+svg.append("path").attr("class", "dept-mesh").attr("d", path(MESH.dept));
+svg.append("path").attr("class", "outline").attr("d", path(MESH.outline));
+svg.append("path").attr("class", "zone-mesh").attr("d", path(MESH.zone));
+for (const z of ZONES) {
+  svg.append("path").attr("class", `zone-hl hl-${z}`)
+    .attr("d", path(topojson.mesh(TOPO, obj, (a, b) => (a === b && zoneOfGeom(a) === z) || (a !== b && (zoneOfGeom(a) === z) !== (zoneOfGeom(b) === z)))));
+}
+
+// Etiquetas de zona
+const LABEL_AT = { norte: [-75.15, 7.55], sur: [-74.2, 0.15], pacifico: [-77.75, 1.2], resto: [-70.9, 4.3] };
+const zLabels = {};
+const gLabels = svg.append("g");
+for (const z of ZONES) {
+  const [lx, ly] = proj(LABEL_AT[z]);
+  const g = gLabels.append("g").attr("class", "zlabel").attr("transform", `translate(${lx},${ly})`);
+  g.append("text").attr("class", "name").attr("text-anchor", "middle").text(ZNAME[z].toUpperCase());
+  zLabels[z] = g.append("text").attr("class", "val").attr("text-anchor", "middle").attr("dy", "1.4em");
+}
+
+// Recuadro de San Andrés
+const gIns = svg.append("g");
+gIns.append("rect").attr("class", "inset-box").attr("x", 30).attr("y", 30).attr("width", 76).attr("height", 132);
+const islandEls = [];
+for (const g of islandObj.geometries) {
+  const el = gIns.append("path").attr("d", islandPath(topojson.feature(TOPO, g))).attr("class", "q0 hit")
+    .attr("stroke", "var(--ink)").attr("stroke-width", .6).node();
+  el.dataset.code = g.properties.c;
+  islandEls.push({ el, m: M[g.properties.c] });
+}
+gIns.append("text").attr("class", "furn-text").attr("x", 36).attr("y", 44).text("SAN ANDRÉS");
+gIns.append("text").attr("class", "furn-text").attr("x", 36).attr("y", 155).text("sin escala");
+
+// Marco, norte y escala
+svg.append("rect").attr("class", "neat-outer").attr("x", FRAME.x0 - 4).attr("y", FRAME.y0 - 4).attr("width", FRAME.x1 - FRAME.x0 + 8).attr("height", FRAME.y1 - FRAME.y0 + 8);
+svg.append("rect").attr("class", "neat-inner").attr("x", FRAME.x0).attr("y", FRAME.y0).attr("width", FRAME.x1 - FRAME.x0).attr("height", FRAME.y1 - FRAME.y0);
+{
+  const g = svg.append("g").attr("transform", `translate(64,${H - 196})`);
+  g.append("path").attr("class", "furn").attr("d", "M0,-26 L9,10 L0,4 Z");
+  g.append("path").attr("d", "M0,-26 L-9,10 L0,4 Z").attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 1);
+  g.append("text").attr("class", "furn-text").attr("text-anchor", "middle").attr("y", -32).style("font-weight", 600).text("N");
+
+  const a = proj([-73, 3.5]), b = proj([-73, 4.5]);
+  const pxPerKm = Math.hypot(a[0] - b[0], a[1] - b[1]) / 110.6;
+  const seg = 100 * pxPerKm;
+  const gs = svg.append("g").attr("transform", `translate(46,${H - 132})`);
+  gs.append("rect").attr("width", seg).attr("height", 5).attr("class", "furn");
+  gs.append("rect").attr("x", seg).attr("width", seg).attr("height", 5).attr("fill", "var(--sheet)").attr("stroke", "var(--ink)").attr("stroke-width", 1);
+  gs.append("rect").attr("width", seg).attr("height", 5).attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 1);
+  [0, 100, 200].forEach((km, k) => gs.append("text").attr("class", "furn-text").attr("x", k * seg).attr("y", 18).attr("text-anchor", "middle").text(km));
+  gs.append("text").attr("class", "furn-text").attr("x", 2 * seg + 10).attr("y", 18).text("km");
+  gs.append("text").attr("class", "furn-text").attr("x", 0).attr("y", 36).text("TM · MERIDIANO 73° O");
+  gs.append("text").attr("class", "furn-text").attr("x", 0).attr("y", 49).text("MGN 2018 · DANE");
+}
+
+// --- Leyenda ----------------------------------------------------------------
+function renderLegend() {
+  const br = BREAKS[state.level][state.metric];
+  const unit = state.metric === "ha"
+    ? `<b>Hectáreas de coca</b> por ${state.level === "mpio" ? "municipio" : "departamento"}`
+    : `<b>Densidad:</b> hectáreas de coca por km² (1 ha/km² = 1 % del territorio)`;
+  const ticks = br.map((b, k) => `<span style="left:${((k + 1) / 7) * 100}%">${fBreak(b)}</span>`).join("");
+  document.getElementById("legend").innerHTML = `
+    <div class="legend-title">${unit} · ${YEARS[state.i]}</div>
+    <div class="legend-row">
+      <span class="legend-none"><i></i>Sin coca detectada</span>
+      <div class="ramp" aria-hidden="true">
+        <div class="ramp-bar">${[1, 2, 3, 4, 5, 6, 7].map(k => `<i style="background:var(--q${k})"></i>`).join("")}</div>
+        <div class="ramp-ticks">${ticks}</div>
+      </div>
+    </div>`;
+}
+
+const cls = (v, br) => { if (!(v > 0)) return 0; let k = 1; for (const b of br) if (v > b) k++; return k; };
+const metricVal = (s, a, i) => { const v = s ? s[i] : 0; return state.metric === "ha" ? v : v / a; };
+
+// --- Cuadro de zonas -------------------------------------------------------
+const zoneRows = d3.select("#zone-rows");
+const sparkMax = d3.max(ZONES, z => d3.max(zoneTot[z]));
+const SPW = 240, SPH = 34;
+const sx = d3.scaleLinear().domain([0, NY - 1]).range([2, SPW - 2]);
+const sy = d3.scaleLinear().domain([0, sparkMax]).range([SPH - 2, 3]);
+const zEls = {};
+for (const z of ZONES) {
+  const btn = zoneRows.append("button").attr("type", "button").attr("class", "zrow").attr("data-zone", z)
+    .attr("aria-label", `Resaltar la zona ${ZNAME[z]} en el mapa`);
+  btn.append("span").attr("class", "sw").style("background", `var(--z-${z})`);
+  btn.append("span").attr("class", "zname").text(ZNAME[z]);
+  const val = btn.append("span").attr("class", "zval");
+  btn.append("span").attr("class", "zdesc").text(ZDESC[z]);
+  const meta = btn.append("span").attr("class", "zmeta");
+  const sp = btn.append("svg").attr("class", "spark").attr("viewBox", `0 0 ${SPW} ${SPH}`).attr("preserveAspectRatio", "none").attr("aria-hidden", "true");
+  sp.append("line").attr("class", "base").attr("x1", 0).attr("x2", SPW).attr("y1", SPH - 1.5).attr("y2", SPH - 1.5).attr("vector-effect", "non-scaling-stroke");
+  const yr = sp.append("line").attr("class", "yr").attr("y1", 0).attr("y2", SPH).attr("vector-effect", "non-scaling-stroke");
+  sp.append("path").attr("class", "line").attr("stroke", `var(--z-${z})`).attr("vector-effect", "non-scaling-stroke")
+    .attr("d", d3.line().x((_, i) => sx(i)).y(v => sy(v))(zoneTot[z]));
+  const dot = sp.append("rect").attr("fill", `var(--z-${z})`).attr("width", 5).attr("height", 5);
+  zEls[z] = { btn, val, meta, yr, dot };
+}
+
+function deltaText(cur, prev, i) {
+  if (i === 0) return "primer año de la serie";
+  if (prev === 0 && cur === 0) return "sin cambio";
+  if (prev === 0) return `+${fInt(cur)} ha (antes 0)`;
+  const p = (cur - prev) / prev * 100;
+  return `<span class="${p >= 0 ? "delta-up" : "delta-down"}">${signed(p, f1)} %</span> frente a ${YEARS[i - 1]}`;
+}
+
+// --- Serie histórica -------------------------------------------------------
+const SW = 1000, SH = 340, SM = { l: 58, r: 104, t: 40, b: 30 };
+const ser = d3.select("#series").attr("viewBox", `0 0 ${SW} ${SH}`);
+const x = d3.scaleLinear().domain([YEARS[0], YEARS[NY - 1]]).range([SM.l, SW - SM.r]);
+const yMax = Math.ceil(d3.max(national) / 50000) * 50000;
+const y = d3.scaleLinear().domain([0, yMax]).range([SH - SM.b, SM.t]);
+const stack = d3.stack().keys(ZONES).value((d, k) => zoneTot[k][d])(d3.range(NY));
+ser.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5).slice(1)).join("line")
+  .attr("x1", SM.l).attr("x2", SW - SM.r).attr("y1", d => y(d)).attr("y2", d => y(d));
+ser.append("g").attr("class", "axis").selectAll("text").data(y.ticks(5)).join("text")
+  .attr("x", SM.l - 8).attr("y", d => y(d) + 4).attr("text-anchor", "end").text(d => d === 0 ? "0" : fInt(d / 1000));
+ser.append("text").attr("class", "ytitle").attr("x", 4).attr("y", SM.t - 24).text("miles de ha");
+const area = d3.area().x((d, i) => x(YEARS[i])).y0(d => y(d[0])).y1(d => y(d[1])).curve(d3.curveMonotoneX);
+ser.append("g").selectAll("path").data(stack).join("path").attr("class", "area").attr("fill", d => `var(--z-${d.key})`).attr("d", area);
+ser.append("line").attr("class", "baseline").attr("x1", SM.l).attr("x2", SW - SM.r).attr("y1", y(0)).attr("y2", y(0));
+ser.append("g").attr("class", "axis").selectAll("text").data(YEARS.filter(yy => yy % 2 === 1 || yy === 2024)).join("text")
+  .attr("x", d => x(d)).attr("y", SH - SM.b + 18).attr("text-anchor", "middle").text(d => d);
+{ // Etiquetas directas al final de cada banda
+  const last = NY - 1;
+  let prevY = Infinity;
+  for (const s of stack) {
+    const yy = Math.min(y((s[last][0] + s[last][1]) / 2), prevY - 26);
+    prevY = yy;
+    const g = ser.append("g").attr("transform", `translate(${SW - SM.r + 10},${yy})`);
+    g.append("text").attr("class", "dlabel").attr("y", -1).text(ZNAME[s.key]);
+    g.append("text").attr("class", "dlabel-v").attr("y", 12).text(fInt(zoneTot[s.key][last]) + " ha");
+  }
+}
+// Hitos: cada punto de la serie es el 31 de diciembre de su año
+const annG = ser.append("g").attr("class", "ann");
+ANNOTATIONS.forEach((a, k) => {
+  const [yy, mm, dd] = a.date;
+  const t = (Date.UTC(yy, mm - 1, dd) - Date.UTC(yy, 0, 1)) / (365 * 864e5);
+  const ax = x(yy - 1 + t);
+  const top = SM.t - 10, cx = ax + (k - 1) * 18;
+  annG.append("line").attr("x1", ax).attr("x2", ax).attr("y1", top + 8).attr("y2", y(0));
+  annG.append("line").attr("class", "leader").attr("x1", ax).attr("x2", cx).attr("y1", top + 8).attr("y2", top + 3);
+  annG.append("circle").attr("cx", cx).attr("cy", top - 5).attr("r", 8);
+  annG.append("text").attr("x", cx).attr("y", top - 1.5).attr("text-anchor", "middle").text(k + 1);
+});
+document.getElementById("ann-list").innerHTML = ANNOTATIONS.map((a, k) =>
+  `<li><span class="n">${k + 1}</span><span><b>${a.label}.</b> ${a.text}</span></li>`).join("");
+document.getElementById("series-legend").innerHTML = ZONES.map(z =>
+  `<span><i style="background:var(--z-${z})"></i>${ZNAME[z]}</span>`).join("");
+
+const curLine = ser.append("line").attr("class", "cur").attr("y1", SM.t - 2).attr("y2", y(0));
+const curLabel = ser.append("text").attr("class", "cur-label").attr("text-anchor", "middle");
+const hoverLine = ser.append("line").attr("class", "hover-line").attr("y1", SM.t).attr("y2", y(0)).attr("display", "none");
+const tt2 = document.getElementById("tt2");
+const yearAt = ev => Math.max(0, Math.min(NY - 1, Math.round(x.invert(d3.pointer(ev)[0]) - YEARS[0])));
+ser.append("rect").attr("x", SM.l - 10).attr("y", 0).attr("width", SW - SM.l - SM.r + 20).attr("height", SH)
+  .attr("fill", "transparent").style("cursor", "pointer")
+  .on("pointermove", ev => {
+    const i = yearAt(ev);
+    hoverLine.attr("display", null).attr("x1", x(YEARS[i])).attr("x2", x(YEARS[i]));
+    const rows = [...ZONES].reverse().map(z => `<dt><span class="tsw" style="background:var(--z-${z})"></span>${ZNAME[z]}</dt><dd>${fInt(zoneTot[z][i])}</dd>`).join("");
+    tt2.innerHTML = `<b>${YEARS[i]}</b><span class="where">Hectáreas a 31 de diciembre</span><dl>${rows}</dl><dl class="total"><dt>Total</dt><dd>${fInt(national[i])}</dd></dl>`;
+    placeTip(tt2, ev, document.querySelector(".chart-wrap"));
+  })
+  .on("pointerleave", () => { hoverLine.attr("display", "none"); tt2.hidden = true; })
+  .on("click", ev => { stopPlay(); setYear(yearAt(ev)); });
+
+// --- Tooltip del mapa --------------------------------------------------------
+const tt = document.getElementById("tt");
+const mapWrap = document.querySelector(".map-wrap");
+function placeTip(tip, ev, wrap) {
+  tip.hidden = false;
+  const r = wrap.getBoundingClientRect();
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let left = ev.clientX - r.left + 14, top = ev.clientY - r.top + 14;
+  if (left + w > r.width - 4) left = ev.clientX - r.left - w - 14;
+  if (top + h > r.height - 4) top = ev.clientY - r.top - h - 14;
+  tip.style.left = Math.max(4, left) + "px";
+  tip.style.top = Math.max(4, top) + "px";
+}
+function tipHTML(name, where, s, a) {
+  const i = state.i, v = s ? s[i] : 0, yr = YEARS[i];
+  const prev = i > 0 && s ? s[i - 1] : (i > 0 ? 0 : null);
+  if (!(v > 0) && !(prev > 0)) {
+    return `<b>${name}</b><span class="where">${where}</span><span class="empty">Sin coca detectada en ${yr}</span>`;
+  }
+  let change = "";
+  if (prev !== null) {
+    const d = v - prev;
+    change = prev > 0 ? `${signed(d, fInt)} ha (${signed(d / prev * 100, f1)} %)` : `${signed(d, fInt)} ha`;
+  }
+  return `<b>${name}</b><span class="where">${where}</span><dl>
+    <dt>Coca en ${yr}</dt><dd>${fInt(v)} ha</dd>
+    <dt>Del total nacional</dt><dd>${fPct(v / national[i] * 100)}</dd>
+    ${prev !== null ? `<dt>Frente a ${yr - 1}</dt><dd>${change}</dd>` : ""}
+    <dt>Densidad</dt><dd>${fDens(v / a)} ha/km²</dd></dl>`;
+}
+function showMapTip(ev, target) {
+  const code = target.dataset.code, key = target.dataset.unit;
+  let html, z;
+  if (code) {
+    const m = M[code];
+    z = m.z;
+    const zoneName = m.d === "27" ? `${ZNAME[m.z]} (Chocó ${m.z === "norte" ? "norte" : "sur"})` : ZNAME[m.z];
+    html = tipHTML(m.n, `${DATA.depts[m.d]} · zona ${zoneName}`, m.s, m.a);
+  } else {
+    const u = unitByKey[key];
+    z = u.z;
+    html = tipHTML(u.name, `Departamento · zona ${ZNAME[u.z]}`, u.s, u.a);
+  }
+  tt.innerHTML = html;
+  placeTip(tt, ev, mapWrap);
+  setFocus(z);
+}
+const isHit = t => t.classList && t.classList.contains("hit");
+svg.on("pointermove", ev => {
+  if (ev.pointerType !== "mouse") return;
+  if (isHit(ev.target)) showMapTip(ev, ev.target);
+  else { tt.hidden = true; setFocus(null); }
+});
+svg.on("pointerleave", ev => { if (ev.pointerType === "mouse") { tt.hidden = true; setFocus(null); } });
+svg.on("pointerdown", ev => {
+  if (ev.pointerType === "mouse") return;
+  if (isHit(ev.target)) showMapTip(ev, ev.target);
+  else { tt.hidden = true; setFocus(null); }
+});
+
+function setFocus(z) {
+  if (state.focus === z) return;
+  state.focus = z;
+  const node = svg.node();
+  if (z) node.setAttribute("data-focus", z); else node.removeAttribute("data-focus");
+  for (const zz of ZONES) zEls[zz].btn.classed("is-focus", zz === z);
+}
+for (const z of ZONES) {
+  zEls[z].btn.on("mouseenter", () => setFocus(z)).on("mouseleave", () => setFocus(null))
+    .on("focus", () => setFocus(z)).on("blur", () => setFocus(null))
+    .on("click", () => setFocus(state.focus === z ? null : z));
+}
+
+// --- Actualización --------------------------------------------------------
+function update() {
+  const i = state.i, yr = YEARS[i];
+  const br = BREAKS[state.level][state.metric];
+  if (state.level === "mpio") {
+    for (const { el, m } of muniEls) el.setAttribute("class", "q" + cls(metricVal(m.s, m.a, i), br) + " hit");
+  } else {
+    for (const { el, u } of unitEls) el.setAttribute("class", "q" + cls(metricVal(u.s, u.a, i), br) + " hit");
+  }
+  for (const { el, m } of islandEls) el.setAttribute("class", "q" + cls(metricVal(m.s, m.a, i), BREAKS.mpio[state.metric]) + " hit");
+  gM.attr("display", state.level === "mpio" ? null : "none");
+  gD.attr("display", state.level === "dpto" ? null : "none");
+
+  for (const z of ZONES) zLabels[z].text(`${fInt(zoneTot[z][i])} ha · ${fPct(zoneTot[z][i] / national[i] * 100)}`);
+
+  // Encabezado
+  document.getElementById("year-out").textContent = yr;
+  document.getElementById("year").value = yr;
+  document.getElementById("hl-eyebrow").textContent = `Total nacional · 31 dic. ${yr}`;
+  document.getElementById("hl-total").innerHTML = `${fInt(national[i])}<small>ha</small>`;
+  document.getElementById("hl-sub").innerHTML = deltaText(national[i], i > 0 ? national[i - 1] : 0, i);
+  const note = document.getElementById("hl-note");
+  note.hidden = yr !== 2001;
+  if (yr === 2001) note.textContent = `La serie municipal de 2001 suma ${fInt(national[0])} ha; UNODC publicó 144.807 ha para ese año. La diferencia no está asignada a municipios.`;
+
+  // Zonas
+  document.getElementById("zones-eyebrow").textContent = `Cuadro de zonas · ${yr}`;
+  for (const z of ZONES) {
+    const v = zoneTot[z][i];
+    zEls[z].val.html(`${fInt(v)}<small>ha</small>`);
+    zEls[z].meta.html(`<span><span class="num">${fPct(v / national[i] * 100)}</span> del país</span><span>${deltaText(v, i > 0 ? zoneTot[z][i - 1] : 0, i)}</span>`);
+    zEls[z].yr.attr("x1", sx(i)).attr("x2", sx(i));
+    zEls[z].dot.attr("x", sx(i) - 2.5).attr("y", sy(v) - 2.5);
+  }
+  document.getElementById("tot-val").innerHTML = `${fInt(national[i])}<small>ha</small>`;
+  document.getElementById("tot-meta").innerHTML = deltaText(national[i], i > 0 ? national[i - 1] : 0, i);
+
+  // Serie
+  curLine.attr("x1", x(yr)).attr("x2", x(yr));
+  curLabel.attr("x", x(yr)).attr("y", SM.t - 10).text(yr).attr("display", yr >= 2015 && yr <= 2018 ? "none" : null);
+
+  // Tabla
+  const ranked = Object.values(M).filter(m => m.s && m.s[i] > 0).sort((a, b) => b.s[i] - a.s[i]);
+  document.getElementById("top-eyebrow").textContent = `Municipios · ${yr}`;
+  document.getElementById("top-sub").textContent = `${fInt(ranked.length)} municipios tenían coca en ${yr}. Los 15 primeros suman el ${fPct(d3.sum(ranked.slice(0, 15), m => m.s[i]) / national[i] * 100)} del total nacional.`;
+  document.getElementById("th-delta").textContent = i > 0 ? `Cambio vs ${yr - 1}` : "Cambio";
+  document.getElementById("top-body").innerHTML = ranked.slice(0, 15).map((m, k) => {
+    const v = m.s[i], prev = i > 0 ? m.s[i - 1] : null;
+    const ch = prev === null ? "—" : prev > 0 ? `${signed((v - prev) / prev * 100, f1)} %` : "nuevo";
+    return `<tr><td class="rank">${k + 1}</td><td>${m.n}</td><td>${DATA.depts[m.d]}</td><td><span class="sw" style="background:var(--z-${m.z})"></span>${ZNAME[m.z]}</td><td class="r">${fInt(v)}</td><td class="r">${fPct(v / national[i] * 100)}</td><td class="r">${ch}</td><td class="r">${fDens(v / m.a)}</td></tr>`;
+  }).join("");
+
+  renderLegend();
+}
+
+function setYear(i) { state.i = i; update(); }
+document.getElementById("year").addEventListener("input", e => { stopPlay(); setYear(+e.target.value - YEARS[0]); });
+function setPressed(a, b, on) { document.getElementById(a).setAttribute("aria-pressed", on); document.getElementById(b).setAttribute("aria-pressed", !on); }
+document.getElementById("m-ha").onclick = () => { state.metric = "ha"; setPressed("m-ha", "m-dens", true); update(); };
+document.getElementById("m-dens").onclick = () => { state.metric = "dens"; setPressed("m-ha", "m-dens", false); update(); };
+document.getElementById("l-mpio").onclick = () => { state.level = "mpio"; setPressed("l-mpio", "l-dpto", true); update(); };
+document.getElementById("l-dpto").onclick = () => { state.level = "dpto"; setPressed("l-mpio", "l-dpto", false); update(); };
+
+// Reproducir: avanza un año por paso; con movimiento reducido, más despacio y sin transiciones
+let timer = null;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+const playBtn = document.getElementById("play");
+const PLAY_ICON = '<path d="M7 4.5v15l12-7.5z"/>', PAUSE_ICON = '<path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/>';
+function setPlayLabel(text) { playBtn.setAttribute("aria-label", text); playBtn.title = text; }
+function stopPlay() {
+  if (!timer) return;
+  clearInterval(timer); timer = null;
+  document.getElementById("play-icon").innerHTML = PLAY_ICON;
+  setPlayLabel("Reproducir la serie 2001–2024");
+}
+playBtn.onclick = () => {
+  if (timer) return stopPlay();
+  if (state.i === NY - 1) setYear(0);
+  document.getElementById("play-icon").innerHTML = PAUSE_ICON;
+  setPlayLabel("Pausar");
+  timer = setInterval(() => {
+    if (state.i >= NY - 1) return stopPlay();
+    setYear(state.i + 1);
+  }, reduce.matches ? 1600 : 750);
+};
+
+// Nota de validación y corte del Chocó
+{
+  document.getElementById("val-text").textContent =
+    `La suma de los municipios coincide con el total nacional que publica UNODC para cada año de 2010 a 2024 (diferencia máxima de ${f1(DATA.validation.maxAbsDiff2010_2024)} ha) y con sus ocho regiones en 2023 y 2024 (diferencias de 1 ha o menos, por redondeo). En 2001 el archivo municipal suma ${fInt(national[0])} ha, ${fInt(144807 - national[0])} ha menos que las 144.807 ha publicadas entonces.`;
+  const li = arr => arr.map(([n, s]) => `<li>${n} <span>· ${s}</span></li>`).join("");
+  document.getElementById("choco").innerHTML =
+    `<div><h4>Chocó norte → zona Norte</h4><ul>${li(DATA.chocoSplit.norte)}</ul></div>` +
+    `<div><h4>Chocó sur → resto del país</h4><ul>${li(DATA.chocoSplit.sur)}</ul></div>`;
+}
+
+update();
+// En pantallas angostas la serie se desplaza: abrirla mostrando los años recientes
+{ const cw = document.querySelector(".chart-wrap"); cw.scrollLeft = cw.scrollWidth; }
+
+// --- Imagen PNG para imprimir ---------------------------------------------
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  let downloads = null;
+  try { downloads = await window.claude.use("downloads"); } catch (e) { downloads = null; }
+  if (!downloads) return;
+  const btn = document.getElementById("png"), toast = document.getElementById("toast");
+  btn.hidden = false;
+  btn.onclick = async () => {
+    toast.textContent = "Preparando la imagen…";
+    try {
+      const blob = await renderPNG();
+      await downloads.save({ filename: `coca-colombia-zonas-${YEARS[state.i]}.png`, data: blob });
+      toast.textContent = "Imagen guardada.";
+    } catch (e) {
+      const code = e && e.code;
+      toast.textContent = code === "declined" ? "" : code === "rate_limited" ? "Ya hay una descarga pendiente; inténtalo de nuevo en un momento." : "No se pudo guardar la imagen en esta vista.";
+      if (code === "unavailable" || code === "not_granted") btn.hidden = true;
+    }
+  };
+})();
+
+async function renderPNG() {
+  await document.fonts.ready;
+  const S = 2, CW = 1600, CH = 1300;
+  const c = document.createElement("canvas");
+  c.width = CW * S; c.height = CH * S;
+  const ctx = c.getContext("2d");
+  ctx.scale(S, S);
+  const P = PRINT, i = state.i, yr = YEARS[i];
+  ctx.fillStyle = P.paper; ctx.fillRect(0, 0, CW, CH);
+  ctx.fillStyle = P.ink; ctx.fillRect(48, 40, CW - 96, 4);
+  ctx.font = "500 15px 'IBM Plex Mono', monospace"; ctx.fillStyle = P.ink3;
+  ctx.fillText("CENSO SIMCI · UNODC Y GOBIERNO DE COLOMBIA", 48, 74);
+  ctx.font = "600 56px 'Barlow Condensed', 'Arial Narrow', sans-serif"; ctx.fillStyle = P.ink;
+  ctx.fillText(`Coca en Colombia por zonas · ${yr}`, 48, 132);
+  ctx.font = "400 19px 'Source Sans 3', sans-serif"; ctx.fillStyle = P.ink2;
+  const metricTxt = state.metric === "ha" ? "Hectáreas de coca" : "Hectáreas de coca por km²";
+  ctx.fillText(`${metricTxt} por ${state.level === "mpio" ? "municipio" : "departamento"}, a 31 de diciembre de ${yr}.`, 48, 162);
+  ctx.fillStyle = P.ink; ctx.fillRect(48, 182, CW - 96, 1);
+
+  // Mapa: mismas coordenadas del SVG, escaladas
+  const k = Math.min(900 / W, (CH - 290) / H);
+  ctx.save();
+  ctx.translate(48, 200); ctx.scale(k, k);
+  const cpath = d3.geoPath(proj, ctx);
+  const br = BREAKS[state.level][state.metric];
+  const fills = state.level === "mpio"
+    ? muniEls.map(({ m, feature }) => ({ g: feature, q: cls(metricVal(m.s, m.a, i), br) }))
+    : unitEls.map(({ u }) => ({ g: u.geom, q: cls(metricVal(u.s, u.a, i), br) }));
+  for (const f of fills) {
+    ctx.beginPath(); cpath(f.g); ctx.fillStyle = P.q[f.q]; ctx.fill();
+    if (state.level === "mpio") { ctx.strokeStyle = P.paper; ctx.lineWidth = .35; ctx.stroke(); }
+  }
+  const strokeMesh = (mesh, color, w) => { ctx.beginPath(); cpath(mesh); ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineJoin = "round"; ctx.stroke(); };
+  strokeMesh(MESH.dept, P.ink3, .6);
+  strokeMesh(MESH.outline, P.ink, 1.1);
+  strokeMesh(MESH.zone, P.ink, 2.2);
+  ctx.textAlign = "center";
+  for (const z of ZONES) {
+    const [lx, ly] = proj(LABEL_AT[z]);
+    ctx.lineJoin = "round"; ctx.strokeStyle = P.paper; ctx.lineWidth = 4; ctx.fillStyle = P.ink;
+    ctx.font = "700 17px 'Barlow Condensed', 'Arial Narrow', sans-serif";
+    ctx.strokeText(ZNAME[z].toUpperCase(), lx, ly); ctx.fillText(ZNAME[z].toUpperCase(), lx, ly);
+    ctx.font = "500 11px 'IBM Plex Mono', monospace";
+    const t = `${fInt(zoneTot[z][i])} ha · ${fPct(zoneTot[z][i] / national[i] * 100)}`;
+    ctx.strokeText(t, lx, ly + 15); ctx.fillText(t, lx, ly + 15);
+  }
+  ctx.restore();
+
+  // Columna derecha: total, zonas y leyenda
+  const rx = 900 * k + 48 + 48, rw = CW - 48 - rx;
+  ctx.textAlign = "left";
+  ctx.font = "500 14px 'IBM Plex Mono', monospace"; ctx.fillStyle = P.ink3;
+  ctx.fillText(`TOTAL NACIONAL · 31 DIC. ${yr}`, rx, 236);
+  ctx.font = "500 50px 'IBM Plex Mono', monospace"; ctx.fillStyle = P.ink;
+  ctx.fillText(`${fInt(national[i])} ha`, rx, 290);
+  let yy = 350;
+  for (const z of ZONES) {
+    ctx.fillStyle = P.z[z]; ctx.fillRect(rx, yy - 16, 16, 16);
+    ctx.fillStyle = P.ink; ctx.font = "600 28px 'Barlow Condensed', 'Arial Narrow', sans-serif";
+    ctx.fillText(ZNAME[z], rx + 28, yy);
+    ctx.textAlign = "right"; ctx.font = "500 22px 'IBM Plex Mono', monospace";
+    ctx.fillText(`${fInt(zoneTot[z][i])} ha`, rx + rw, yy);
+    ctx.textAlign = "left"; ctx.font = "400 16px 'Source Sans 3', sans-serif"; ctx.fillStyle = P.ink2;
+    ctx.fillText(`${fPct(zoneTot[z][i] / national[i] * 100)} del país`, rx + 28, yy + 24);
+    ctx.fillText(ZDESC[z], rx + 28, yy + 46, rw - 28);
+    ctx.fillStyle = P.rule; ctx.fillRect(rx, yy + 64, rw, 1);
+    yy += 100;
+  }
+  yy += 20;
+  ctx.fillStyle = P.ink; ctx.font = "600 17px 'Source Sans 3', sans-serif";
+  ctx.fillText(state.metric === "ha" ? "Hectáreas de coca" : "Densidad (ha de coca por km²)", rx, yy);
+  yy += 16;
+  const bw = rw / 8;
+  ctx.fillStyle = P.none; ctx.fillRect(rx, yy, bw - 6, 18);
+  for (let q = 1; q <= 7; q++) { ctx.fillStyle = P.q[q]; ctx.fillRect(rx + q * bw, yy, bw - 2, 18); }
+  ctx.font = "400 13px 'IBM Plex Mono', monospace"; ctx.fillStyle = P.ink2;
+  ctx.fillText("Sin coca", rx, yy + 38);
+  ctx.textAlign = "center";
+  br.forEach((b, j) => ctx.fillText(fBreak(b), rx + (j + 2) * bw - 1, yy + 38));
+  ctx.textAlign = "left";
+
+  // Pie
+  ctx.fillStyle = P.ink; ctx.fillRect(48, CH - 76, CW - 96, 1);
+  ctx.font = "400 14px 'Source Sans 3', sans-serif"; ctx.fillStyle = P.ink2;
+  ctx.fillText("Fuente: MinJusticia – Observatorio de Drogas de Colombia, censo SIMCI (UNODC y Gobierno de Colombia), datos.gov.co acs4-3wgp. Límites: DANE MGN 2018.", 48, CH - 50);
+  ctx.fillText("Zonas: Norte = Norte de Santander, Antioquia, Córdoba, Bolívar y norte del Chocó · Sur = Putumayo y Caquetá · Pacífico = Nariño · Resto = demás departamentos y sur del Chocó.", 48, CH - 28);
+  return await new Promise(res => c.toBlob(res, "image/png"));
+}
+</script>
